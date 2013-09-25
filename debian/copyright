@@ -1,0 +1,9 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Contact: Aaron Murray <aaron@omv-extras.org>
+Copyright: 2013 Aaron Murray <aaron@omv-extras.org>
+License: GPL-3
+
+Files: /var/www/openmediavault/images/webdav.png
+       /var/www/openmediavault/images/webdav.svg
+Copyright: IcoMoon <http://www.icomoon.io>
+IcoMoon <http://www.icomoon.io>
