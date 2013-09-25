@@ -1,3 +1,9 @@
+openmediavault-webdav (0.5.1) stable; urgency=low
+
+  * add message to settings screen
+
+ -- Aaron Murray <aaron@omv-extras.org>  Wed, 25 Sep 2013 10:56:38 -0500
+ 
 openmediavault-webdav (0.5.0) stable; urgency=low
 
   * initial release
