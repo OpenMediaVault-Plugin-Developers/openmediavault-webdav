@@ -32,12 +32,12 @@ case "$1" in
 
 	remove)
 
-		if [ -a /etc/apache2/sites-enabled/omv-webdav ]
+		if [ -f /etc/apache2/sites-enabled/omv-webdav ]
 			then
 				rm -f /etc/apache2/sites-enabled/omv-webdav
 		fi
 
-		if [ -a /etc/apache2/sites-available/omv-webdav ]
+		if [ -f /etc/apache2/sites-available/omv-webdav ]
 			then
 				rm -f /etc/apache2/sites-available/omv-webdav
 		fi

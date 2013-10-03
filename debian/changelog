@@ -1,3 +1,9 @@
+openmediavault-webdav (0.5.3) stable; urgency=low
+
+  * fix typo
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 03 Oct 2013 14:29:38 -0500
+
 openmediavault-webdav (0.5.2) stable; urgency=low
 
   * change postrm
