@@ -28,21 +28,27 @@ OMV_MKCONF_SCRIPTS_DIR=${OMV_MKCONF_SCRIPTS_DIR:-"/usr/share/openmediavault/mkco
 
 WEBDAV_NAME="omv-webdav"
 WEBDAV_CONFIG="/etc/apache2/sites-available/omv-webdav"
+WEBDAV_CONFIG2="/etc/apache2/sites-enabled/omv-webdav"
 DAV_FS_MOD="/etc/apache2/mods-enabled/dav_fs.load"
 
 # Enable/disable webdav
 if [ "$(omv_config_get "//services/webdav/enable")" != "1" ]; then
-  if [ -h $DAV_FS_MOD ]
+  if [ -a $DAV_FS_MOD ]
     then
 	a2dismod dav_fs 2>&1
 	a2dismod dav 2>&1
   fi
 
-  if [ -h $WEBDAV_CONFIG ]
+  if [ -a $WEBDAV_CONFIG2 ]
     then
-	a2dissite "$WEBDAV_NAME" 2>&1
+	  rm WEBDAV_CONFIG2
   fi
 
+  if [ -a $WEBDAV_CONFIG ]
+    then
+	  rm WEBDAV_CONFIG
+  fi
+  
   exit 0
 fi
 

@@ -32,11 +32,16 @@ case "$1" in
 
 	remove)
 
-		if [ -h /etc/apache2/sites-enabled/omv-webdav ]
+		if [ -a /etc/apache2/sites-enabled/omv-webdav ]
 			then
-				a2dissite "$WEBDAV_NAME" 2>&1
+				rm -f /etc/apache2/sites-enabled/omv-webdav
 		fi
-	
+
+		if [ -a /etc/apache2/sites-available/omv-webdav ]
+			then
+				rm -f /etc/apache2/sites-available/omv-webdav
+		fi
+		
 		if [ -h /etc/apache2/mods-enabled/dav_fs.load ]
 			then
 				a2dismod dav_fs 2>&1
