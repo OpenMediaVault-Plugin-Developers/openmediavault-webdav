@@ -1,0 +1,37 @@
+# openmediavault-webdav
+# Copyright (C) 2013
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# zubr139 <zubr139@ukr.net>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: openmediavault-webdav\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-28 09:25-0500\n"
+"PO-Revision-Date: 2013-10-28 17:23+0000\n"
+"Last-Translator: zubr139 <zubr139@ukr.net>\n"
+"Language-Team: Ukrainian (http://www.transifex.com/projects/p/openmediavault-webdav/language/uk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Enable"
+msgstr "Активувати"
+
+msgid "General settings"
+msgstr "Загальні налаштування"
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "Shared Folder"
+msgstr "Спільний каталог"
+
+msgid "This share will have ownership changed to www-data:users."
+msgstr ""
+
+msgid "WebDAV"
+msgstr "WebDAV"
