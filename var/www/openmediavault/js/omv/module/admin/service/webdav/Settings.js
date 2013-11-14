@@ -27,46 +27,46 @@
  * @derived OMV.workspace.form.Panel
  */
 Ext.define("OMV.module.admin.service.webdav.Settings", {
-	extend: "OMV.workspace.form.Panel",
-	uses: [
-		"OMV.form.field.SharedFolderComboBox"
-	],
-	
-	rpcService: "WebDav",
-	rpcGetMethod: "getSettings",
-	rpcSetMethod: "setSettings",
+    extend: "OMV.workspace.form.Panel",
+    uses: [
+        "OMV.form.field.SharedFolderComboBox"
+    ],
 
-	getFormItems: function() {
-		var me = this;
-		return [{
-			xtype: "fieldset",
-			title: _("General settings"),
-			fieldDefaults: {
-				labelSeparator: ""
-			},
-			items: [{
-				xtype: "checkbox",
-				name: "enable",
-				fieldLabel: _("Enable"),
-				checked: false
-			},{
-				xtype: "sharedfoldercombo",
-				name: "sharedfolderref",
-				fieldLabel: _("Shared Folder"),
-				allowNone: false,
-				plugins: [{
-					ptype: "fieldinfo",
-					text: _("This share will have ownership changed to www-data:users.")
-				}]
-			}]
-		}];
-	}
+    rpcService: "WebDav",
+    rpcGetMethod: "getSettings",
+    rpcSetMethod: "setSettings",
+
+    getFormItems: function() {
+        var me = this;
+        return [{
+            xtype: "fieldset",
+            title: _("General settings"),
+            fieldDefaults: {
+                labelSeparator: ""
+            },
+            items: [{
+                xtype: "checkbox",
+                name: "enable",
+                fieldLabel: _("Enable"),
+                checked: false
+            },{
+                xtype: "sharedfoldercombo",
+                name: "sharedfolderref",
+                fieldLabel: _("Shared Folder"),
+                allowNone: false,
+                plugins: [{
+                    ptype: "fieldinfo",
+                    text: _("This share will have ownership changed to www-data:users.")
+                }]
+            }]
+        }];
+    }
 });
 
 OMV.WorkspaceManager.registerPanel({
-	id: "settings",
-	path: "/service/webdav",
-	text: _("Settings"),
-	position: 10,
-	className: "OMV.module.admin.service.webdav.Settings"
+    id: "settings",
+    path: "/service/webdav",
+    text: _("Settings"),
+    position: 10,
+    className: "OMV.module.admin.service.webdav.Settings"
 });
