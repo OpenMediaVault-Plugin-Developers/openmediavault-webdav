@@ -1,3 +1,9 @@
+openmediavault-webdav (0.5.5) stable; urgency=low
+
+  * add locales
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 22 Dec 2013 11:40:38 -0500
+
 openmediavault-webdav (0.5.4) stable; urgency=low
 
   * add locales
