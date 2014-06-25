@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Alexander Savchenko <>, 2013
+# Alexander Savchenko <a.v.savchenko@mail.ru>, 2013
 # артур Мудрых <arturmon82@gmail.com>, 2013
 msgid ""
 msgstr ""

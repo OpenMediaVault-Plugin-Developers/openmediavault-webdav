@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# zdeno <mcharvat@zdeno.net>, 2013
+# Michal Charvát <mcharvat@zdeno.net>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-14 14:07-0600\n"
 "PO-Revision-Date: 2013-12-14 01:31+0000\n"
-"Last-Translator: zdeno <mcharvat@zdeno.net>\n"
+"Last-Translator: Michal Charvát <mcharvat@zdeno.net>\n"
 "Language-Team: Czech (Czech Republic) (http://www.transifex.com/projects/p/openmediavault-webdav/language/cs_CZ/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

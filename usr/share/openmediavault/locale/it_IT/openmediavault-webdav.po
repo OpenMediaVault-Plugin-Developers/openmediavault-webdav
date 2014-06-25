@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Paolo Velati <paolo.velati@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-14 14:07-0600\n"
-"PO-Revision-Date: 2013-12-03 12:19+0000\n"
-"Last-Translator: ryecoaaron <aaron27@ryecoinc.com>\n"
+"PO-Revision-Date: 2014-01-13 00:53+0000\n"
+"Last-Translator: Paolo Velati <paolo.velati@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/openmediavault-webdav/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Enable"
-msgstr ""
+msgstr "Abilita"
 
 msgid "General settings"
-msgstr ""
+msgstr "Impostazioni generali"
 
 msgid "Settings"
-msgstr ""
+msgstr "Impostazioni"
 
 msgid "Shared Folder"
-msgstr ""
+msgstr "Cartella Condivisa"
 
 msgid "This share will have ownership changed to www-data:users."
-msgstr ""
+msgstr "Questa condivisione avrà il proprietario cambiato in www-data:users."
 
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
