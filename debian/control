@@ -1,18 +1,14 @@
 Source: openmediavault-webdav
 Section: misc
 Priority: optional
-Maintainer: Aaron Murray <aaron@omv-extras.org>
-Build-Depends: debhelper (>= 7 )
+Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+Build-Depends: debhelper (>= 9.0.0 )
 Standards-Version: 3.9.3
 Homepage: http://omv-extras.org/
 
 Package: openmediavault-webdav
 Architecture: all
-Depends: ${misc:Depends}, 
-		openmediavault (>= 0.5), openmediavault (<< 0.6), 
-		libapache2-mod-authz-unixgroup,
-		pwauth,
-		libapache2-mod-authnz-external
+Depends: ${misc:Depends}, openmediavault (>= 0.6.0.13),
+ libapache2-mod-authz-unixgroup, pwauth, libapache2-mod-authnz-external
 Description: OpenMediaVault WebDAV plugin
- web interface to enable WebDAV and select
- share for files
+ web interface to enable WebDAV and select share for files

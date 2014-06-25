@@ -1,91 +1,26 @@
 #!/bin/sh
 #
-# This file is part of OpenMediaVault.
+# Copyright (C) 2013-2014 OpenMediaVault Plugin Developers
 #
-# @license   http://www.gnu.org/licenses/gpl.html GPL Version 3
-# @author    Aaron Murray <aaron@omv-extras.org>
-# @copyright Copyright (c) 2013 Aaron Murray
-#
-# OpenMediaVault is free software: you can redistribute it and/or modify
+# This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # any later version.
 #
-# OpenMediaVault is distributed in the hope that it will be useful,
+# This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with OpenMediaVault. If not, see <http://www.gnu.org/licenses/>.
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 set -e
 
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-OMV_MKCONF_SCRIPTS_DIR=${OMV_MKCONF_SCRIPTS_DIR:-"/usr/share/openmediavault/mkconf"}
-
-WEBDAV_NAME="omv-webdav"
-WEBDAV_CONFIG="/etc/apache2/sites-available/omv-webdav"
-WEBDAV_CONFIG2="/etc/apache2/sites-enabled/omv-webdav"
-DAV_FS_MOD="/etc/apache2/mods-enabled/dav_fs.load"
-
 # Enable/disable webdav
 if [ "$(omv_config_get "//services/webdav/enable")" != "1" ]; then
-  if [ -a $DAV_FS_MOD ]
-    then
-	a2dismod dav_fs 2>&1
-	a2dismod dav 2>&1
-  fi
-
-  if [ -a $WEBDAV_CONFIG2 ]
-    then
-	  rm WEBDAV_CONFIG2
-  fi
-
-  if [ -a $WEBDAV_CONFIG ]
-    then
-	  rm WEBDAV_CONFIG
-  fi
-  
-  exit 0
+    exit 0
 fi
-
-sfref=$(omv_config_get "//services/webdav/sharedfolderref")
-sfpath=$(omv_get_sharedfolder_path "${sfref}")
-
-# Create sites-available file
-cat <<EOF > ${WEBDAV_CONFIG}
-AddExternalAuth pwauth /usr/sbin/pwauth
-SetExternalAuthMethod pwauth pipe
-AddExternalGroup unixgroup /usr/local/bin/unixgroup
-SetExternalGroupMethod unixgroup environment
-
-Alias /dav "${sfpath}"
-
-<Directory ${sfpath}>
-  Options Indexes MultiViews
-  AllowOverride None
-  Order allow,deny
-  allow from all
-</Directory>
-
-<Location /dav/>
-  Dav on
-  AuthType Basic
-  AuthBasicProvider external
-  AuthExternal pwauth
-  GroupExternal unixgroup
-  AuthName "omvdav"
-  Require group webdavusers
-</Location>
-EOF
-
-chown -R www-data:users "${sfpath}"
-#setfacl -R -m g:webdavusers:rw "${sfpath}"
-#setfacl -R -m u:www-data:rw "${sfpath}"
-
-a2enmod dav_fs 2>&1
-a2enmod authnz_external 2>&1
-a2ensite "$WEBDAV_NAME" 2>&1

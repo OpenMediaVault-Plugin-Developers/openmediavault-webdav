@@ -1,3 +1,10 @@
+openmediavault-webdav (0.6.0) UNRELEASED; urgency=low
+
+  * Update for kralizec
+  * Update locales
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 22 Dec 2013 11:40:38 -0500
+
 openmediavault-webdav (0.5.5) stable; urgency=low
 
   * add locales
@@ -22,16 +29,16 @@ openmediavault-webdav (0.5.2) stable; urgency=low
   * add long description
 
  -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 03 Oct 2013 13:52:38 -0500
- 
+
 openmediavault-webdav (0.5.1) stable; urgency=low
 
   * add message to settings screen
 
  -- Aaron Murray <aaron@omv-extras.org>  Wed, 25 Sep 2013 10:56:38 -0500
- 
+
 openmediavault-webdav (0.5.0) stable; urgency=low
 
   * initial release
 
  -- Aaron Murray <aaron@omv-extras.org>  Wed, 25 Sep 2013 08:09:38 -0500
- 
+

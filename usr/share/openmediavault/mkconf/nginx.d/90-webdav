@@ -1,0 +1,67 @@
+#!/bin/sh
+#
+# Copyright (C) 2013-2014 OpenMediaVault Plugin Developers
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+# References:
+# http://wiki.nginx.org/WordPress
+# http://codex.wordpress.org/Nginx
+
+set -e
+
+. /etc/default/openmediavault
+. /usr/share/openmediavault/scripts/helper-functions
+
+WEBDAV_ENABLED_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
+
+if [ -e "${WEBDAV_ENABLED_CONF}" ]; then
+    rm ${WEBDAV_ENABLED_CONF}
+fi
+
+if [ "$(omv_config_get "//services/webdav/enable")" != "1" ]; then
+    exit 0
+fi
+
+sfref=$(omv_config_get "//services/webdav/sharedfolderref")
+sfpath=$(omv_get_sharedfolder_path "${sfref}")
+
+cat <<EOF > "${WEBDAV_ENABLED_CONF}"
+location /dav/ {
+    root ${sfpath};
+
+    auth_pam "Secure Zone";
+    auth_pam_service_name "nginx";
+
+    client_body_temp_path /tmp/nginx/client-tmp 1 2;
+    create_full_put_path on;
+    client_max_body_size 2g;
+
+    dav_access user:rw group:rw all:r;
+    dav_methods PUT DELETE MKCOL COPY MOVE;
+    dav_ext_methods PROPFIND OPTIONS;
+}
+EOF
+
+chown -R www-data:users "${sfpath}"
+#setfacl -R -m g:webdavusers:rw "${sfpath}"
+#setfacl -R -m u:www-data:rw "${sfpath}"
+
+cat <<EOF > "/etc/pam.d/nginx"
+    auth    required pam_listfile.so onerr=fail item=group sense=allow file=/usr/local/nginx/conf/nginx.group
+    auth    required pam_unix.so
+    account required pam_unix.so
+EOF
+
+exit 0
