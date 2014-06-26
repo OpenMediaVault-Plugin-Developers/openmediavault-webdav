@@ -38,19 +38,22 @@ sfref=$(omv_config_get "//services/webdav/sharedfolderref")
 sfpath=$(omv_get_sharedfolder_path "${sfref}")
 
 cat <<EOF > "${WEBDAV_ENABLED_CONF}"
-location /dav/ {
-    root ${sfpath};
+server {
+    listen 90 default_server;
 
-    auth_pam "Secure Zone";
-    auth_pam_service_name "nginx";
+    location / {
+        root ${sfpath};
 
-    client_body_temp_path /tmp/nginx/client-tmp 1 2;
-    create_full_put_path on;
-    client_max_body_size 2g;
+        client_body_temp_path /tmp/webdav-client-tmp 1 2;
+        create_full_put_path on;
+        client_max_body_size 2g;
 
-    dav_access user:rw group:rw all:r;
-    dav_methods PUT DELETE MKCOL COPY MOVE;
-    dav_ext_methods PROPFIND OPTIONS;
+        dav_access user:rw group:rw all:r;
+        dav_methods PUT DELETE MKCOL COPY MOVE;
+        dav_ext_methods PROPFIND OPTIONS;
+    }
+
+    large_client_header_buffers 4 32k;
 }
 EOF
 
