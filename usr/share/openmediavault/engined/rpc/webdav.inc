@@ -25,93 +25,83 @@ require_once("openmediavault/rpcservice.inc");
 require_once("openmediavault/notify.inc");
 
 class OMVRpcServiceWebDav extends OMVRpcServiceAbstract {
-	/**
-	 * Get the RPC service name.
-	 */
-	public function getName() {
-		return "WebDAV";
-	}
 
-	/**
-	 * Initialize the RPC service.
-	 */
-	public function initialize() {
-		$this->registerMethod("getSettings");
-		$this->registerMethod("setSettings");
-	}
+    public function getName() {
+        return "WebDAV";
+    }
 
-	/**
-	 * Get the settings configuration object.
-	 * @param params The method parameters.
-	 * @param context The context of the caller.
-	 * @return The requested configuration object.
-	 * @throw E_CONFIG_GET_OBJECT_FAILED
-	 */
-	public function getSettings($params, $context) {
-		global $xmlConfig;
-		// Validate the RPC caller context.
-		$this->validateMethodContext($context, array(
-			  "role" => OMV_ROLE_ADMINISTRATOR
-		  ));
-		// Get the configuration object.
-		$xpath = "//services/webdav";
-		$object = $xmlConfig->get($xpath);
-		if(is_null($object)) {
-			throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED,
-			  $xpath);
-		}
+    private function getPluginName() {
+        return strtolower( $this->getName() );
+    }
 
-		// Modify the result object.
-		$object['enable'] = boolval($object['enable']);
+    private function getXPath() {
+        $path = sprintf( "//services/%s", $this->getPluginName() );
+        return $path;
+    }
 
-		return $object;
-	}
+    private function getEventMessagePath() {
+        $path = sprintf( "org.openmediavault.services.%s", $this->getPluginName() );
+        return $path;
+    }
 
-	/**
-	 * Set the settings configuration object.
-	 * @param params The method parameters.
-	 * @param context The context of the caller.
-	 * @return The stored configuration object.
-	 * @throw E_CONFIG_GET_OBJECT_FAILED
-	 * @throw E_CONFIG_SET_OBJECT_FAILED
-	 */
-	public function setSettings($params, $context) {
-		global $xmlConfig;
-		// Validate the RPC caller context.
-		$this->validateMethodContext($context, array(
-			  "role" => OMV_ROLE_ADMINISTRATOR
-		  ));
-		// Validate the parameters of the RPC service method.
-		$this->validateMethodParams($params, '{
-			  "type":"object",
-			  "properties":{
-				  "enable":{"type":"boolean"},
-				  "sharedfolderref":{"type":"string"}
-			  }
-		  }');
-		// Get the existing configuration object.
-		$xpath = "//services/webdav";
-		$oldObject = $xmlConfig->get($xpath);
-		if(is_null($oldObject)) {
-			throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED,
-			  $xpath);
-		}
-		// Update the configuration object.
-		$object = array(
-			"enable" => array_boolval($params, 'enable'),
-			"sharedfolderref" => $params['sharedfolderref']
-		);
-		if(FALSE === $xmlConfig->replace("//services/webdav", $object)) {
-			throw new OMVException(OMVErrorMsg::E_CONFIG_SET_OBJECT_FAILED);
-		}
-		// Notify configuration changes.
-		$dispatcher = &OMVNotifyDispatcher::getInstance();
-		$dispatcher->notify(OMV_NOTIFY_MODIFY,
-		  "org.openmediavault.services.webdav", $object);
-		// Return the configuration object.
-		return $object;
-	}
+    public function initialize() {
+        $this->registerMethod("getSettings");
+        $this->registerMethod("setSettings");
+    }
 
+    public function getSettings($params, $context) {
+        global $xmlConfig;
+
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, array( "role" => OMV_ROLE_ADMINISTRATOR ));
+
+        // Get the configuration object.
+        $object = $xmlConfig->get( $this->getXPath() );
+        if(is_null($object))
+            throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED, $this->getXPath() );
+
+        // Modify the result object.
+        $object['enable'] = boolval($object['enable']);
+
+        return $object;
+    }
+
+    public function setSettings($params, $context) {
+        global $xmlConfig;
+
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, array( "role" => OMV_ROLE_ADMINISTRATOR ));
+
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, '{
+            "type"       : "object",
+            "properties" : {
+                "enable"          : { "type" : "boolean" },
+                "sharedfolderref" : { "type" : "string" }
+            }
+        }');
+
+        // Get the existing configuration object.
+        $oldObject = $xmlConfig->get( $this->getXPath() );
+        if(is_null($oldObject))
+            throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED, $this->getXPath() );
+
+        // Update the configuration object.
+        $object = array(
+            "enable"          => array_boolval($params, 'enable'),
+            "sharedfolderref" => $params['sharedfolderref']
+        );
+
+        if(FALSE === $xmlConfig->replace($this->getXPath(), $object))
+            throw new OMVException(OMVErrorMsg::E_CONFIG_SET_OBJECT_FAILED);
+
+        // Notify configuration changes.
+        $dispatcher = &OMVNotifyDispatcher::getInstance();
+        $dispatcher->notify(OMV_NOTIFY_MODIFY, $this->getEventMessagePath(), $object);
+
+        // Return the configuration object.
+        return $object;
+    }
 }
 
 // Register the RPC service.

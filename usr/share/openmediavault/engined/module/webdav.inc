@@ -23,47 +23,43 @@ require_once("openmediavault/error.inc");
 require_once("openmediavault/initscript.inc");
 
 class OMVModuleWebDav extends OMVModuleServiceAbstract
-  implements OMVINotifyListener {
-	/**
-	 * Get the module name.
-	 */
-	public function getName() {
-		return "webdav";
-	}
+    implements OMVINotifyListener {
 
-	/**
-	 * Generate the configuration.
-	 * @throw E_EXEC_FAILED
-	 */
-	public function applyConfig() {
-		global $xmlConfig;
+    public function getName() {
+        return "webdav";
+    }
 
-		$cmd = "omv-mkconf webdav 2>&1";
-		if(0 !== $this->exec($cmd, $output)) {
-			throw new OMVException(OMVErrorMsg::E_EXEC_FAILED, $cmd, implode("\n", $output));
-		}
+    private function getPluginName() {
+        return strtolower( $this->getName() );
+    }
 
-		$xpath = "//services/webdav";
-		$object = $xmlConfig->get($xpath);
+    private function getXPath() {
+        $path = sprintf( "//services/%s", $this->getPluginName() );
+        return $path;
+    }
 
-		if(is_null($object)) {
-			throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED, $xpath);
-		}
-		if(FALSE === boolval($object['enable']))
-			return;	
-		
-		$initd = new OMVSysVInitScript("apache2", TRUE);
-		$initd->invoke("graceful");
-	}
+    private function getEventMessagePath() {
+        $path = sprintf( "org.openmediavault.services.%s", $this->getPluginName() );
+        return $path;
+    }
 
-	/**
-	 * Bind listeners.
-	 */
-	function bindListeners(OMVNotifyDispatcher $dispatcher) {
-		$dispatcher->addListener(
-		  OMV_NOTIFY_MODIFY,
-		  "org.openmediavault.services.webdav",
-		  array($this, "setDirty"));
+    public function applyConfig() {
+        $cmd = "omv-mkconf webdav 2>&1";
+        if(0 !== $this->exec($cmd, $output))
+            throw new OMVException(OMVErrorMsg::E_EXEC_FAILED, $cmd, implode("\n", $output));
+    }
+
+    function bindListeners(OMVNotifyDispatcher $dispatcher) {
+        $dispatcher->addListener(
+            OMV_NOTIFY_MODIFY,
+            $this->getEventMessagePath(),
+            array($this, "setDirty"));
+
+        $moduleMgr = &OMVModuleMgr::getInstance();
+        $dispatcher->addListener(
+            OMV_NOTIFY_MODIFY,
+            $this->getEventMessagePath(),
+            array($moduleMgr->getModule("webserver"), "setDirty"));
     }
 }
 

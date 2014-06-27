@@ -24,9 +24,13 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-WEBDAV_ENABLED_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
+WEBDAV_PROXY_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
+WEBDAV_AVAILABLE_CONF="/etc/nginx/sites-available/openmediavault-webdav.conf"
+WEBDAV_ENABLED_DIR="/etc/nginx/sites-enabled/"
+WEBDAV_ENABLED_CONF="${WEBDAV_ENABLED_DIR}openmediavault-webdav.conf"
 
 if [ -e "${WEBDAV_ENABLED_CONF}" ]; then
+    rm ${WEBDAV_PROXY_CONF}
     rm ${WEBDAV_ENABLED_CONF}
 fi
 
@@ -34,10 +38,16 @@ if [ "$(omv_config_get "//services/webdav/enable")" != "1" ]; then
     exit 0
 fi
 
+cat <<EOF > "${WEBDAV_PROXY_CONF}"
+location /webdav/ {
+    return 301 http://\$host:90;
+}
+EOF
+
 sfref=$(omv_config_get "//services/webdav/sharedfolderref")
 sfpath=$(omv_get_sharedfolder_path "${sfref}")
 
-cat <<EOF > "${WEBDAV_ENABLED_CONF}"
+cat <<EOF > "${WEBDAV_AVAILABLE_CONF}"
 server {
     listen 90 default_server;
 
@@ -57,14 +67,10 @@ server {
 }
 EOF
 
+ln -s ${WEBDAV_AVAILABLE_CONF} ${WEBDAV_ENABLED_DIR}
+
 chown -R www-data:users "${sfpath}"
 #setfacl -R -m g:webdavusers:rw "${sfpath}"
 #setfacl -R -m u:www-data:rw "${sfpath}"
-
-cat <<EOF > "/etc/pam.d/nginx"
-    auth    required pam_listfile.so onerr=fail item=group sense=allow file=/usr/local/nginx/conf/nginx.group
-    auth    required pam_unix.so
-    account required pam_unix.so
-EOF
 
 exit 0

@@ -5,6 +5,11 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
+WEBDAV_PROXY_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
+WEBDAV_AVAILABLE_CONF="/etc/nginx/sites-available/openmediavault-webdav.conf"
+WEBDAV_ENABLED_DIR="/etc/nginx/sites-enabled/"
+WEBDAV_ENABLED_CONF="${WEBDAV_ENABLED_DIR}openmediavault-webdav.conf"
+
 case "$1" in
 
     purge)
@@ -14,23 +19,19 @@ case "$1" in
 
     remove)
 
-        if [ -f /etc/apache2/sites-enabled/omv-webdav ]
-            then
-                rm -f /etc/apache2/sites-enabled/omv-webdav
+        if [ -f ${WEBDAV_PROXY_CONF} ]; then
+            rm -f ${WEBDAV_PROXY_CONF}
         fi
 
-        if [ -f /etc/apache2/sites-available/omv-webdav ]
-            then
-                rm -f /etc/apache2/sites-available/omv-webdav
+        if [ -f ${WEBDAV_ENABLED_CONF} ]; then
+            rm -f ${WEBDAV_ENABLED_CONF}
         fi
 
-        if [ -h /etc/apache2/mods-enabled/dav_fs.load ]
-            then
-                a2dismod dav_fs 2>&1
-                a2dismod dav 2>&1
+        if [ -f ${WEBDAV_AVAILABLE_CONF} ]; then
+            rm -f ${WEBDAV_AVAILABLE_CONF}
         fi
 
-        /etc/init.d/apache2 reload
+        service nginx reload
     ;;
 
     upgrade|failed-upgrade|abort-install|abort-upgrade|disappear|remove)
