@@ -20,29 +20,41 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-OMV_WEBDAV_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
+PHP_FPM_POOL_DIR=/etc/php5/fpm/pool.d
+OMV_WEBDAV_POOL_CONF="${PHP_FPM_POOL_DIR}/openmediavault-webdav.conf"
 
-if [ -e "${OMV_WEBDAV_SITE_CONF}" ]; then
-    rm ${OMV_WEBDAV_SITE_CONF}
+if [ -e "${OMV_WEBDAV_POOL_CONF}" ]; then
+    rm ${OMV_WEBDAV_POOL_CONF}
 fi
 
 if [ "$(omv_config_get "/config/services/webdav/enable")" != "1" ]; then
     exit 0
 fi
 
-cat <<EOF > "${OMV_WEBDAV_SITE_CONF}"
-location /webdav/ {
-    alias /var/www/webdav/;
+cat <<EOF > "${OMV_WEBDAV_POOL_CONF}"
+[openmediavault-webdav]
+listen = /var/run/php5-fpm-openmediavault-webdav.sock
+listen.owner = www-data
+listen.group = www-data
+listen.mode = 0600
 
-    rewrite ^/(.*)$ /server.php last;
+user = www-data
+group = www-data
 
-    location ~ \.php$ {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/var/run/php5-fpm-openmediavault-webdav.sock;
-        fastcgi_index server.php;
-        include fastcgi_params;
-    }
-}
+pm = dynamic
+pm.max_children = 5
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+
+php_value[include_path] = ".:/usr/share/php:/usr/share/sabredav"
+php_value[post_max_size] = 25M
+php_value[upload_max_filesize] = 25M
+php_flag[output_buffering] = Off
+php_flag[always_populate_raw_post_data] = Off
+php_flag[magic_quotes_gpc] = Off
+php_flag[mbstring.func_overload] = Off
+
 EOF
 
 exit 0

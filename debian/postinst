@@ -8,19 +8,14 @@ set -e
 case "$1" in
 
     configure)
+        SERVICE_XPATH_NAME="webdav"
+        SERVICE_XPATH="/config/services/${SERVICE_XPATH_NAME}"
 
-        if ! omv_config_exists "/config/services/webdav"; then
-            echo "Initialize configuration"
-            object="<enable>0</enable>"
-            object="${object}<sharedfolderref></sharedfolderref>"
-            omv_config_add_element "/config/services" "webdav" "${object}" true
-        fi
-
-        if ! grep -q "^webdavusers:" /etc/group; then
-            echo "Add group: webdavusers"
-            groupadd webdavusers
-        else
-            echo "webdavusers group already exists!"
+        # Add the default configuration
+        if ! omv_config_exists "${SERVICE_XPATH}"; then
+            omv_config_add_element "/config/services" "${SERVICE_XPATH_NAME}"
+            omv_config_add_element "${SERVICE_XPATH}" "enable" "0"
+            omv_config_add_element "${SERVICE_XPATH}" "sharedfolderref"
         fi
 
         dpkg-trigger update-fixperms
