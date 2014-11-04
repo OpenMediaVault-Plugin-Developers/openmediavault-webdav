@@ -5,33 +5,31 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-WEBDAV_PROXY_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
-WEBDAV_AVAILABLE_CONF="/etc/nginx/sites-available/openmediavault-webdav.conf"
-WEBDAV_ENABLED_DIR="/etc/nginx/sites-enabled/"
-WEBDAV_ENABLED_CONF="${WEBDAV_ENABLED_DIR}openmediavault-webdav.conf"
+OMV_WEBDAV_POOL_CONF="/etc/php5/fpm/pool.d/openmediavault-webdav.conf"
+OMV_WEBDAV_SERVER_CONF="/var/www/webdav/config.php"
+OMV_WEBDAV_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
 
 case "$1" in
 
     purge)
-        # Remove the configuration data
         omv_config_delete "/config/services/webdav"
     ;;
 
     remove)
-
-        if [ -f ${WEBDAV_PROXY_CONF} ]; then
-            rm -f ${WEBDAV_PROXY_CONF}
+        if [ -e "${OMV_WEBDAV_POOL_CONF}" ]; then
+            rm ${OMV_WEBDAV_POOL_CONF}
         fi
 
-        if [ -f ${WEBDAV_ENABLED_CONF} ]; then
-            rm -f ${WEBDAV_ENABLED_CONF}
+        if [ -e "${OMV_WEBDAV_SERVER_CONF}" ]; then
+            rm ${OMV_WEBDAV_SERVER_CONF}
         fi
 
-        if [ -f ${WEBDAV_AVAILABLE_CONF} ]; then
-            rm -f ${WEBDAV_AVAILABLE_CONF}
+        if [ -e "${OMV_WEBDAV_SITE_CONF}" ]; then
+            rm ${OMV_WEBDAV_SITE_CONF}
         fi
 
-        service nginx reload
+        invoke-rc.d nginx reload
+        invoke-rc.d php5-fpm reload
     ;;
 
     upgrade|failed-upgrade|abort-install|abort-upgrade|disappear|remove)

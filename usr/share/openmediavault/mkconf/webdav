@@ -20,7 +20,18 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-# Enable/disable webdav
-if [ "$(omv_config_get "//services/webdav/enable")" != "1" ]; then
+OMV_WEBDAV_SERVER_CONF="/var/www/webdav/config.php"
+
+if [ "$(omv_config_get "/config/services/webdav/enable")" != "1" ]; then
     exit 0
 fi
+
+sharedfolderref=$(omv_config_get "/config/services/webdav/sharedfolderref")
+share_path=$(omv_get_sharedfolder_path "${sharedfolderref}")
+
+cat <<EOF > "${OMV_WEBDAV_SERVER_CONF}"
+<?php
+
+\$publicDir = "${share_path}";
+
+EOF
