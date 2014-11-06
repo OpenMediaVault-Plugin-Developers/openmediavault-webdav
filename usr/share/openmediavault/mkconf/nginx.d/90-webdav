@@ -31,10 +31,10 @@ if [ "$(omv_config_get "/config/services/webdav/enable")" != "1" ]; then
 fi
 
 cat <<EOF > "${OMV_WEBDAV_SITE_CONF}"
-location /webdav/ {
+location /webdav {
     alias /var/www/webdav/;
 
-    rewrite ^/(.*)$ /server.php last;
+    rewrite ^/webdav/(.*)$ /webdav/server.php last;
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
