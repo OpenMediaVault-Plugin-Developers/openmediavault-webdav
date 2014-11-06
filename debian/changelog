@@ -1,5 +1,5 @@
-openmediavault-webdav (1.0.0) stable; urgency=low
+openmediavault-webdav 1.0.1 UNRELEASED; urgency=low
 
-  * Initial OMV 1.0 release
+  * Initial release.
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org> Mon, 03 Nov 2014 21:51:14 +0100
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 06 Nov 2014 22:25:23 +0100
