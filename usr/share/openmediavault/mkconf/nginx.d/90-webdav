@@ -20,6 +20,7 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
+OMV_WEBDAV_DOCUMENTROOT_DIR="/var/www/webdav/"
 OMV_WEBDAV_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
 
 if [ -e "${OMV_WEBDAV_SITE_CONF}" ]; then
@@ -32,7 +33,7 @@ fi
 
 cat <<EOF > "${OMV_WEBDAV_SITE_CONF}"
 location /webdav {
-    alias /var/www/webdav/;
+    alias ${OMV_WEBDAV_DOCUMENTROOT_DIR};
 
     rewrite ^/webdav/(.*)$ /webdav/server.php last;
 

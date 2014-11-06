@@ -5,6 +5,8 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
+OMV_WEBDAV_DOCUMENTROOT_DIR="/var/www/webdav"
+
 case "$1" in
 
     configure)
@@ -17,6 +19,8 @@ case "$1" in
             omv_config_add_element "${SERVICE_XPATH}" "enable" "0"
             omv_config_add_element "${SERVICE_XPATH}" "sharedfolderref"
         fi
+
+        omv_install_fixperms "${OMV_WEBDAV_DOCUMENTROOT_DIR}"
 
         dpkg-trigger update-fixperms
         dpkg-trigger update-locale
