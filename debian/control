@@ -1,11 +1,10 @@
 Source: openmediavault-webdav
 Section: net
-XB-Plugin-Section: filesystems
 Priority: optional
 Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-Build-Depends: debhelper (>= 9.0.0 )
-Standards-Version: 3.9.3
-Homepage: http://omv-extras.org/
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+XB-Plugin-Section: filesystems
 
 Package: openmediavault-webdav
 Architecture: all
@@ -13,4 +12,4 @@ Depends: openmediavault (>= 1.0.29),
          php-sabre-dav,
          ${misc:Depends}
 Description: OpenMediaVault WebDAV plugin.
- Web interface to enable WebDAV and select share for files.
+ Web interface to enable WebDAV and select a share for files.
