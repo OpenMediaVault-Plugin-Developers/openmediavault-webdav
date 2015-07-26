@@ -19,7 +19,7 @@
 
 require_once __DIR__."/../app/Autoload/Loader.php";
 
-$autoloader = new OmvWebdav\Autoload\Loader();
+$autoloader = new OMVWebDAV\Autoload\Loader();
 
 $autoloader->addClassMap("OMVRpc", "/usr/share/php/openmediavault/rpc.inc");
 $autoloader->addNamespace("Sabre\\", "/usr/share/php/Sabre");
