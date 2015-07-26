@@ -9,6 +9,8 @@ Homepage: http://omv-extras.org/
 
 Package: openmediavault-webdav
 Architecture: all
-Depends: sabredav, ${misc:Depends}, openmediavault (>= 1.0.29)
-Description: OpenMediaVault WebDAV plugin
- web interface to enable WebDAV and select share for files
+Depends: openmediavault (>= 1.0.29),
+         php-sabre-dav,
+         ${misc:Depends}
+Description: OpenMediaVault WebDAV plugin.
+ Web interface to enable WebDAV and select share for files.

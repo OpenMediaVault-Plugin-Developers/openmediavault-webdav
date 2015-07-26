@@ -20,7 +20,7 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-OMV_WEBDAV_DOCUMENTROOT_DIR="/var/www/webdav/"
+OMV_WEBDAV_DOCUMENTROOT_DIR="/var/www/webdav/public"
 OMV_WEBDAV_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
 
 if [ -e "${OMV_WEBDAV_SITE_CONF}" ]; then
@@ -35,12 +35,12 @@ cat <<EOF > "${OMV_WEBDAV_SITE_CONF}"
 location /webdav {
     alias ${OMV_WEBDAV_DOCUMENTROOT_DIR};
 
-    rewrite ^/webdav/(.*)$ /webdav/server.php last;
+    rewrite ^/webdav/(.*)$ /webdav/index.php last;
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass unix:/var/run/php5-fpm-openmediavault-webdav.sock;
-        fastcgi_index server.php;
+        fastcgi_index index.php;
         include fastcgi_params;
     }
 }
