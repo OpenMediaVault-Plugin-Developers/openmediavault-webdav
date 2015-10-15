@@ -1,5 +1,7 @@
+<?php
+
 /**
- * Copyright (C) 2013-2015 OpenMediaVault Plugin Developers
+ * Copyright (C) 2015 OpenMediaVault Plugin Developers
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,12 +17,12 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-// require("js/omv/WorkspaceManager.js")
+require_once __DIR__."/../app/Autoload/Loader.php";
 
-OMV.WorkspaceManager.registerNode({
-    id: "webdav",
-    path: "/service",
-    text: _("WebDAV"),
-    icon16: "images/webdav.png",
-    iconSvg: "images/webdav.svg"
-});
+$autoloader = new OMVWebDAV\Autoload\Loader();
+
+$autoloader->addClassMap("OMVRpc", "/usr/share/php/openmediavault/rpc.inc");
+$autoloader->addNamespace("Sabre\\", "/usr/share/php/Sabre");
+$autoloader->addNamespace("OMVWebDAV\\", __DIR__."/../app");
+
+$autoloader->register();

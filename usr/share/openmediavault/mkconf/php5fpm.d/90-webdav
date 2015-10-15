@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2013-2014 OpenMediaVault Plugin Developers
+# Copyright (C) 2013-2015 OpenMediaVault Plugin Developers
 #
 # This file is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ pm.start_servers = 2
 pm.min_spare_servers = 1
 pm.max_spare_servers = 3
 
-php_value[include_path] = ".:/usr/share/php:/usr/share/sabredav"
+php_value[include_path] = ".:/usr/share/php"
 php_value[post_max_size] = 25M
 php_value[upload_max_filesize] = 25M
 php_value[expose_php] = Off
