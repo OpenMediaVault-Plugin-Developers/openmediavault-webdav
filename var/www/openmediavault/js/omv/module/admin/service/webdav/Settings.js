@@ -47,6 +47,12 @@ Ext.define("OMV.module.admin.service.webdav.Settings", {
                 name: "sharedfolderref",
                 fieldLabel: _("Shared folder"),
                 allowNone: false
+            }, {
+                xtype: "numberfield",
+                name: "upload_max",
+                fieldLabel: _("Filesize upload limit (MiB)"),
+                minValue: 1,
+                value: 2
             }]
         }];
     }

@@ -22,16 +22,19 @@ set -e
 
 PHP_FPM_POOL_DIR=/etc/php5/fpm/pool.d
 OMV_WEBDAV_POOL_CONF="${PHP_FPM_POOL_DIR}/openmediavault-webdav.conf"
+OMV_WEBDAV_XPATH="/config/services/webdav"
 
 if [ -e "${OMV_WEBDAV_POOL_CONF}" ]; then
     rm ${OMV_WEBDAV_POOL_CONF}
 fi
 
-if [ "$(omv_config_get "/config/services/webdav/enable")" != "1" ]; then
+if [ "$(omv_config_get "${OMV_WEBDAV_XPATH}/enable")" != "1" ]; then
     exit 0
 fi
 
-cat <<EOF > "${OMV_WEBDAV_POOL_CONF}"
+upload_max=$(omv_config_get "${OMV_WEBDAV_XPATH}/upload_max")
+
+cat > "${OMV_WEBDAV_POOL_CONF}" <<EOF
 [openmediavault-webdav]
 listen = /var/run/php5-fpm-openmediavault-webdav.sock
 listen.owner = www-data
@@ -48,15 +51,14 @@ pm.min_spare_servers = 1
 pm.max_spare_servers = 3
 
 php_value[include_path] = ".:/usr/share/php"
-php_value[post_max_size] = 25M
-php_value[upload_max_filesize] = 25M
+php_value[post_max_size] = ${upload_max}M
+php_value[upload_max_filesize] = ${upload_max}M
 php_value[expose_php] = Off
 php_value[session.name] = OMVWEBDAVSESSID
 php_flag[output_buffering] = Off
 php_flag[always_populate_raw_post_data] = Off
 php_flag[magic_quotes_gpc] = Off
 php_flag[mbstring.func_overload] = Off
-
 EOF
 
 exit 0

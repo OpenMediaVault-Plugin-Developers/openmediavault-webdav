@@ -22,18 +22,22 @@ set -e
 
 OMV_WEBDAV_DOCUMENTROOT_DIR="/var/www/webdav/public"
 OMV_WEBDAV_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
+OMV_WEBDAV_XPATH="/config/services/webdav"
 
 if [ -e "${OMV_WEBDAV_SITE_CONF}" ]; then
     rm ${OMV_WEBDAV_SITE_CONF}
 fi
 
-if [ "$(omv_config_get "/config/services/webdav/enable")" != "1" ]; then
+if [ "$(omv_config_get "${OMV_WEBDAV_XPATH}/enable")" != "1" ]; then
     exit 0
 fi
 
-cat <<EOF > "${OMV_WEBDAV_SITE_CONF}"
+upload_max=$(omv_config_get "${OMV_WEBDAV_XPATH}/upload_max")
+
+cat > "${OMV_WEBDAV_SITE_CONF}" <<EOF
 location /webdav {
     alias ${OMV_WEBDAV_DOCUMENTROOT_DIR};
+    client_max_body_size ${upload_max}M;
 
     rewrite ^/webdav/(.*)$ /webdav/index.php last;
 
