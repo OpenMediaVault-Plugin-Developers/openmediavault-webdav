@@ -51,14 +51,15 @@ pm.min_spare_servers = 1
 pm.max_spare_servers = 3
 
 php_value[include_path] = ".:/usr/share/php"
-php_value[post_max_size] = ${upload_max}M
-php_value[upload_max_filesize] = ${upload_max}M
+php_value[date.timezone] = UTC
 php_value[expose_php] = Off
+php_value[post_max_size] = ${upload_max}M
 php_value[session.name] = OMVWEBDAVSESSID
-php_flag[output_buffering] = Off
+php_value[upload_max_filesize] = ${upload_max}M
 php_flag[always_populate_raw_post_data] = Off
 php_flag[magic_quotes_gpc] = Off
 php_flag[mbstring.func_overload] = Off
+php_flag[output_buffering] = Off
 EOF
 
 exit 0
