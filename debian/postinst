@@ -18,6 +18,7 @@ case "$1" in
             omv_config_add_element "/config/services" "${SERVICE_XPATH_NAME}"
             omv_config_add_element "${SERVICE_XPATH}" "enable" "0"
             omv_config_add_element "${SERVICE_XPATH}" "sharedfolderref"
+            omv_config_add_element "${SERVICE_XPATH}" "upload_max" "2"
         fi
 
         omv_install_fixperms "${OMV_WEBDAV_DOCUMENTROOT_DIR}"

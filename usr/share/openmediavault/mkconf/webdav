@@ -21,15 +21,16 @@ set -e
 . /usr/share/openmediavault/scripts/helper-functions
 
 OMV_WEBDAV_SERVER_CONF="/var/www/webdav/config/config.php"
+OMV_WEBDAV_XPATH="/config/services/webdav"
 
-if [ "$(omv_config_get "/config/services/webdav/enable")" != "1" ]; then
+if [ "$(omv_config_get "${OMV_WEBDAV_XPATH}/enable")" != "1" ]; then
     exit 0
 fi
 
-sharedfolderref=$(omv_config_get "/config/services/webdav/sharedfolderref")
+sharedfolderref=$(omv_config_get "${OMV_WEBDAV_XPATH}/sharedfolderref")
 share_path=$(omv_get_sharedfolder_path "${sharedfolderref}")
 
-cat <<EOF > "${OMV_WEBDAV_SERVER_CONF}"
+cat > "${OMV_WEBDAV_SERVER_CONF}" <<EOF
 <?php
 
 \$publicDir = "${share_path}";

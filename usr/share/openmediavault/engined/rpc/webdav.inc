@@ -68,6 +68,7 @@ class OMVRpcServiceWebDav extends OMVRpcServiceAbstract
 
         // Modify the result object.
         $object["enable"] = boolval($object["enable"]);
+        $object["upload_max"] = intval($object["upload_max"]);
 
         return $object;
     }
@@ -88,7 +89,8 @@ class OMVRpcServiceWebDav extends OMVRpcServiceAbstract
                 "type": "object",
                 "properties": {
                     "enable": { "type": "boolean" },
-                    "sharedfolderref": { "type": "string" }
+                    "sharedfolderref": { "type": "string" },
+                    "upload_max": { "type": "integer", "minimum": 1 }
                 }
             }'
         );
@@ -105,8 +107,9 @@ class OMVRpcServiceWebDav extends OMVRpcServiceAbstract
 
         // Update the configuration object.
         $object = array(
-            "enable" => array_boolval($params, "enable"),
-            "sharedfolderref" => $params["sharedfolderref"]
+            "enable" => boolval($params["enable"]),
+            "sharedfolderref" => $params["sharedfolderref"],
+            "upload_max" => intval($params["upload_max"]),
         );
 
         if (false === $xmlConfig->replace($this->getXpath(), $object)) {
