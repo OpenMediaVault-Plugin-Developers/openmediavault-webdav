@@ -29,6 +29,24 @@ Ext.define("OMV.module.admin.service.webdav.Settings", {
     rpcGetMethod: "getSettings",
     rpcSetMethod: "setSettings",
 
+    getButtonItems: function() {
+        var items = this.callParent(arguments);
+
+        items.push({
+            id: this.getId() + "-show",
+            xtype: "button",
+            text: _("Show"),
+            icon: "images/search.png",
+            iconCls: Ext.baseCSSPrefix + "btn-icon-16x16",
+            scope: this,
+            handler: function() {
+                window.open("/webdav/", "_blank");
+            }
+        });
+
+        return items;
+    },
+
     getFormItems: function() {
         var me = this;
         return [{
