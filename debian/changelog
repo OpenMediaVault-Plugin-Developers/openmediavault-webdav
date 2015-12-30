@@ -1,3 +1,9 @@
+openmediavault-webdav (3.0) stable; urgency=low
+
+  * OMV 3.0 release. 
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 30 Dec 2015 19:14:24 +0100
+
 openmediavault-webdav (2.0) stable; urgency=low
 
   * Add upload size option.
