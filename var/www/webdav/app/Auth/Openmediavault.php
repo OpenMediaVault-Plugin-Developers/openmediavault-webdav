@@ -40,14 +40,14 @@ class Openmediavault extends AbstractBasic
             $result = OMVRpc::exec(
                 "UserMgmt",
                 "authUser",
-                array(
+                [
                     "username" => $username,
                     "password" => $password
-                ),
-                array(
+                ],
+                [
                     "username" => "admin",
                     "role" => OMV_ROLE_ADMINISTRATOR
-                ),
+                ],
                 OMV_RPC_MODE_REMOTE
             );
 

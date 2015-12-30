@@ -20,41 +20,60 @@
 require_once("openmediavault/config.inc");
 require_once("openmediavault/error.inc");
 require_once("openmediavault/notify.inc");
-require_once("openmediavault/object.inc");
 require_once("openmediavault/rpcservice.inc");
-require_once("openmediavault/util.inc");
 
 class OMVRpcServiceWebDav extends OMVRpcServiceAbstract
 {
+    private $eventMessagePath = "org.openmediavault.services.webdav";
+
+    /**
+    * Get the service configuration XPath.
+    *
+    * @return string
+    */
     private function getXpath()
     {
-        return sprintf("/config/services/webdav");
+        return "/config/services/webdav";
     }
 
-    private function getEventMessagePath()
-    {
-        return sprintf("org.openmediavault.services.webdav");
-    }
-
+    /**
+     * Get the name of the RPC service.
+     *
+     * @return string
+     */
     public function getName()
     {
         return "WebDAV";
     }
 
+    /**
+     * Initialize the RPC service.
+     *
+     * @return void
+     */
     public function initialize()
     {
         $this->registerMethod("getSettings");
         $this->registerMethod("setSettings");
     }
 
+    /**
+     * Get the settings of the service.
+     *
+     * @param array $params The method paramaters.
+     * @param array $context The context of the caller.
+     * @return array
+     *
+     * @throws OMVException
+     */
     public function getSettings($params, $context)
     {
         global $xmlConfig;
 
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, array(
+        $this->validateMethodContext($context, [
             "role" => OMV_ROLE_ADMINISTRATOR
-        ));
+        ]);
 
         // Get the configuration object.
         $object = $xmlConfig->get($this->getXpath());
@@ -73,14 +92,23 @@ class OMVRpcServiceWebDav extends OMVRpcServiceAbstract
         return $object;
     }
 
+    /**
+     * Set the settings of the service.
+     *
+     * @param array $params The method paramaters.
+     * @param array $context The context of the caller.
+     * @return array
+     *
+     * @throws OMVException
+     */
     public function setSettings($params, $context)
     {
         global $xmlConfig;
 
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, array(
+        $this->validateMethodContext($context, [
             "role" => OMV_ROLE_ADMINISTRATOR
-        ));
+        ]);
 
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams(
@@ -106,13 +134,13 @@ class OMVRpcServiceWebDav extends OMVRpcServiceAbstract
         }
 
         // Update the configuration object.
-        $object = array(
+        $object = [
             "enable" => boolval($params["enable"]),
             "sharedfolderref" => $params["sharedfolderref"],
             "upload_max" => intval($params["upload_max"]),
-        );
+        ];
 
-        if (false === $xmlConfig->replace($this->getXpath(), $object)) {
+        if ($xmlConfig->replace($this->getXpath(), $object) === false) {
             throw new OMVException(OMVErrorMsg::E_CONFIG_SET_OBJECT_FAILED);
         }
 
@@ -120,7 +148,7 @@ class OMVRpcServiceWebDav extends OMVRpcServiceAbstract
         $dispatcher = &OMVNotifyDispatcher::getInstance();
         $dispatcher->notify(
             OMV_NOTIFY_MODIFY,
-            $this->getEventMessagePath(),
+            $this->eventMessagePath,
             $object
         );
 

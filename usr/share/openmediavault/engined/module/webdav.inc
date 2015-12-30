@@ -17,76 +17,92 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once "openmediavault/config.inc";
 require_once "openmediavault/error.inc";
 require_once "openmediavault/module.inc";
+require_once "openmediavault/notify.inc";
 
 class OMVModuleWebDav extends OMVModuleServiceAbstract implements
     OMVINotifyListener
 {
+    private $eventMessagePath = "org.openmediavault.services.webdav";
+    private $sharedFolderEventMessagePath = "org.openmediavault.system.shares.sharedfolder";
+
+    /**
+     * Get the service configuration XPath.
+     *
+     * @return string
+     */
     private function getXpath()
     {
-        return sprintf("/config/services/%s", $this->getPluginName());
+        return "/config/services/webdav";
     }
 
-    private function getEventMessagePath()
-    {
-        return sprintf("org.openmediavault.services.%s", $this->getName());
-    }
-
-    private function getSharedFolderEventMessagePath()
-    {
-        return "org.openmediavault.system.shares.sharedfolder";
-    }
-
+    /**
+     * Get the module name.
+     *
+     * @return string
+     */
     public function getName()
     {
         return "webdav";
     }
 
+    /**
+     * Create and update the configuration.
+     *
+     * @return void
+     *
+     * @throws OMVException
+     */
     public function applyConfig()
     {
-        $cmd = sprintf("omv-mkconf %s 2>&1", $this->getName());
+        $cmd = sprintf("export LANG=C; omv-mkconf %s 2>&1", $this->getName());
 
         if (0 !== $this->exec($cmd, $output)) {
             throw new OMVException(
                 OMVErrorMsg::E_EXEC_FAILED,
                 $cmd,
-                implode("\n", $output)
+                implode(PHP_EOL, $output)
             );
         }
     }
 
+    /**
+     * Bind listeners.
+     *
+     * @param OMVNotifyDispatcher $dispatcher
+     * @return void
+     */
     public function bindListeners(OMVNotifyDispatcher $dispatcher)
     {
         $moduleMgr = &OMVModuleMgr::getInstance();
 
         $dispatcher->addListener(
             OMV_NOTIFY_MODIFY,
-            $this->getEventMessagePath(),
-            array($this, "setDirty")
+            $this->eventMessagePath,
+            [$this, "setDirty"]
         );
 
         $dispatcher->addListener(
             OMV_NOTIFY_MODIFY,
-            $this->getEventMessagePath(),
-            array($moduleMgr->getModule("php5fpm"), "setDirty")
+            $this->eventMessagePath,
+            [$moduleMgr->getModule("php5fpm"), "setDirty"]
         );
 
         $dispatcher->addListener(
             OMV_NOTIFY_MODIFY,
-            $this->getEventMessagePath(),
-            array($moduleMgr->getModule("webserver"), "setDirty")
+            $this->eventMessagePath,
+            [$moduleMgr->getModule("webserver"), "setDirty"]
         );
 
         $dispatcher->addListener(
             OMV_NOTIFY_MODIFY,
-            $this->getSharedFolderEventMessagePath(),
-            array($this, "setDirty")
+            $this->sharedFolderEventMessagePath,
+            [$this, "setDirty"]
         );
     }
 }
 
-// Register module.
+// Register the module.
 $moduleMgr = &OMVModuleMgr::getInstance();
 $moduleMgr->registerModule(new OMVModuleWebDav());
