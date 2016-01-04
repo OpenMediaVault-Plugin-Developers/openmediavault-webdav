@@ -28,8 +28,8 @@ case "$1" in
             rm ${OMV_WEBDAV_SITE_CONF}
         fi
 
-        invoke-rc.d nginx reload
-        invoke-rc.d php5-fpm reload
+        deb-systemd-invoke reload nginx.service >/dev/null || true
+        deb-systemd-invoke reload php5-fpm.service >/dev/null || true
     ;;
 
     upgrade|failed-upgrade|abort-install|abort-upgrade|disappear|remove)
