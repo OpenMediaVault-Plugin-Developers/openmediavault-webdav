@@ -37,15 +37,26 @@ upload_max=$(omv_config_get "${OMV_WEBDAV_XPATH}/upload_max")
 cat > "${OMV_WEBDAV_SITE_CONF}" <<EOF
 location /webdav {
     alias ${OMV_WEBDAV_DOCUMENTROOT_DIR};
-    client_max_body_size ${upload_max}M;
 
+    client_max_body_size ${upload_max}M;
+    index index.php;
+
+    dav_methods off;
+    # Because of a bug in Nginx (https://trac.nginx.org/nginx/ticket/97) we
+    # use try_files as we want to in an alias. In the meantime we use rewrite.
+    # The following line is what we want:
+    # try_files \$uri \$uri/ /webdav/index.php?\$args;
     rewrite ^/webdav/(.*)$ /webdav/index.php last;
 
-    location ~ \.php$ {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    location ~ \.php\$ {
+        include fastcgi.conf;
+        fastcgi_param SCRIPT_FILENAME \$request_filename;
         fastcgi_pass unix:/var/run/php5-fpm-openmediavault-webdav.sock;
-        fastcgi_index index.php;
-        include fastcgi_params;
+    }
+
+    location = /webdav/favicon.ico {
+        access_log off;
+        log_not_found off;
     }
 }
 EOF

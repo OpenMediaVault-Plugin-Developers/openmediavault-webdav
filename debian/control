@@ -10,6 +10,7 @@ Package: openmediavault-webdav
 Architecture: all
 Depends: openmediavault (>= 3.0),
          php-sabre-dav,
+         php-symfony-class-loader,
          ${misc:Depends}
 Description: OpenMediaVault WebDAV plugin.
  Web interface to enable WebDAV and select a share for files.

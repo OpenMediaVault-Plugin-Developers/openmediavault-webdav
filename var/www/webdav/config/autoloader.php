@@ -17,12 +17,23 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once __DIR__."/../app/Autoload/Loader.php";
+require_once "Symfony/Component/ClassLoader/ClassLoader.php";
+require_once "Symfony/Component/ClassLoader/MapClassLoader.php";
 
-$autoloader = new OMVWebDAV\Autoload\Loader();
+use Symfony\Component\ClassLoader\ClassLoader;
+use Symfony\Component\ClassLoader\MapClassLoader;
 
-$autoloader->addClassMap("OMVRpc", "/usr/share/php/openmediavault/rpc.inc");
-$autoloader->addNamespace("Sabre\\", "/usr/share/php/Sabre");
-$autoloader->addNamespace("OMVWebDAV\\", __DIR__."/../app");
+$loader = new ClassLoader();
 
-$autoloader->register();
+$loader->setUseIncludePath(true);
+
+$loader->register();
+
+$mapLoader = new MapClassLoader([
+    "OMVRpc" => "/usr/share/php/openmediavault/rpc.inc",
+    // Normally we would add OMVWebDAV to the ClassLoader but we're only PSR-4
+    // compliant and not PSR-0.
+    "OMVWebDAV\\Auth\\Openmediavault" => __DIR__."/../app/Auth/Openmediavault.php",
+]);
+
+$mapLoader->register();
