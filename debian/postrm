@@ -6,7 +6,7 @@ set -e
 . /usr/share/openmediavault/scripts/helper-functions
 
 OMV_WEBDAV_POOL_CONF="/etc/php5/fpm/pool.d/openmediavault-webdav.conf"
-OMV_WEBDAV_SERVER_CONF="/var/www/webdav/config.php"
+OMV_WEBDAV_SERVER_CONF="/var/www/webdav/config/config.php"
 OMV_WEBDAV_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
 
 case "$1" in
@@ -17,15 +17,15 @@ case "$1" in
 
     remove)
         if [ -e "${OMV_WEBDAV_POOL_CONF}" ]; then
-            rm ${OMV_WEBDAV_POOL_CONF}
+            rm "${OMV_WEBDAV_POOL_CONF}"
         fi
 
         if [ -e "${OMV_WEBDAV_SERVER_CONF}" ]; then
-            rm ${OMV_WEBDAV_SERVER_CONF}
+            rm "${OMV_WEBDAV_SERVER_CONF}"
         fi
 
         if [ -e "${OMV_WEBDAV_SITE_CONF}" ]; then
-            rm ${OMV_WEBDAV_SITE_CONF}
+            rm "${OMV_WEBDAV_SITE_CONF}"
         fi
 
         deb-systemd-invoke reload nginx.service >/dev/null || true
