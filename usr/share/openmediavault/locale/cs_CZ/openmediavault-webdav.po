@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Michal Charvát <mcharvat@zdeno.net>, 2013
+# Pavel Borecki <pavel.borecki@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-14 14:07-0600\n"
-"PO-Revision-Date: 2014-11-14 19:52+0000\n"
-"Last-Translator: Aaron Murray <aaron27@ryecoinc.com>\n"
-"Language-Team: Czech (Czech Republic) (http://www.transifex.com/projects/p/openmediavault-webdav/language/cs_CZ/)\n"
+"POT-Creation-Date: 2016-02-15 07:35-0600\n"
+"PO-Revision-Date: 2016-02-15 13:36+0000\n"
+"Last-Translator: Aaron Murray <aaronmurray27@gmail.com>\n"
+"Language-Team: Czech (Czech Republic) (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/cs_CZ/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,19 +20,22 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 msgid "Enable"
-msgstr "Povolit"
+msgstr "Zapnout"
+
+msgid "Filesize upload limit (MiB)"
+msgstr ""
 
 msgid "General settings"
-msgstr "Obecné nastavení"
+msgstr "Obecná nastavení"
 
 msgid "Settings"
 msgstr "Nastavení"
 
-msgid "Shared Folder"
-msgstr "Sdílený adresář"
+msgid "Shared folder"
+msgstr ""
 
-msgid "This share will have ownership changed to www-data:users."
-msgstr "Sdílené složce budou práva změněna na www-data:users."
+msgid "Show"
+msgstr ""
 
 msgid "WebDAV"
 msgstr "WebDAV"

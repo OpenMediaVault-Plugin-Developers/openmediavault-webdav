@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-14 14:07-0600\n"
+"POT-Creation-Date: 2016-02-15 07:35-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,16 +20,19 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
+msgid "Filesize upload limit (MiB)"
+msgstr ""
+
 msgid "General settings"
 msgstr ""
 
 msgid "Settings"
 msgstr ""
 
-msgid "Shared Folder"
+msgid "Shared folder"
 msgstr ""
 
-msgid "This share will have ownership changed to www-data:users."
+msgid "Show"
 msgstr ""
 
 msgid "WebDAV"

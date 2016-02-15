@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Andi Chandler <andi@gowling.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
@@ -10,24 +11,24 @@ msgstr ""
 "POT-Creation-Date: 2016-02-15 07:35-0600\n"
 "PO-Revision-Date: 2016-02-15 13:36+0000\n"
 "Last-Translator: Aaron Murray <aaronmurray27@gmail.com>\n"
-"Language-Team: Adyghe (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/ady/)\n"
+"Language-Team: English (United Kingdom) (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ady\n"
+"Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Enable"
-msgstr ""
+msgstr "Enable"
 
 msgid "Filesize upload limit (MiB)"
 msgstr ""
 
 msgid "General settings"
-msgstr ""
+msgstr "General settings"
 
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
 msgid "Shared folder"
 msgstr ""
@@ -36,4 +37,4 @@ msgid "Show"
 msgstr ""
 
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
