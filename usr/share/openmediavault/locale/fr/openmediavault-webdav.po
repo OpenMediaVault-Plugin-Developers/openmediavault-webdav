@@ -34,4 +34,4 @@ msgid "This share will have ownership changed to www-data:users."
 msgstr "Ce partage verra son propriétaire changé à www-data:users."
 
 msgid "WebDAV"
-msgstr "XebDAV"
+msgstr "WebDAV"
