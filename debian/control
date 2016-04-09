@@ -9,7 +9,7 @@ XB-Plugin-Section: filesystems
 Package: openmediavault-webdav
 Architecture: all
 Depends: adduser,
-         openmediavault (>= 3.0),
+         openmediavault (>= 3.0.15),
          php-sabre-dav,
          php-symfony-class-loader,
          ${misc:Depends}
