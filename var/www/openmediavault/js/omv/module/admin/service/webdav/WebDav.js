@@ -18,9 +18,9 @@
 // require("js/omv/WorkspaceManager.js")
 
 OMV.WorkspaceManager.registerNode({
-    id: "webdav",
-    path: "/service",
-    text: _("WebDAV"),
-    icon16: "images/webdav.png",
-    iconSvg: "images/webdav.svg"
+    id: 'webdav',
+    path: '/service',
+    text: _('WebDAV'),
+    icon16: 'images/webdav.png',
+    iconSvg: 'images/webdav.svg'
 });

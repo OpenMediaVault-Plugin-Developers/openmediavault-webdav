@@ -19,28 +19,28 @@
 // require("js/omv/form/field/SharedFolderComboBox.js")
 // require("js/omv/workspace/form/Panel.js")
 
-Ext.define("OMV.module.admin.service.webdav.Settings", {
-    extend: "OMV.workspace.form.Panel",
+Ext.define('OMV.module.admin.service.webdav.Settings', {
+    extend: 'OMV.workspace.form.Panel',
     uses: [
-        "OMV.form.field.SharedFolderComboBox"
+        'OMV.form.field.SharedFolderComboBox'
     ],
 
-    rpcService: "WebDAV",
-    rpcGetMethod: "getSettings",
-    rpcSetMethod: "setSettings",
+    rpcService: 'WebDAV',
+    rpcGetMethod: 'getSettings',
+    rpcSetMethod: 'setSettings',
 
     getButtonItems: function() {
         var items = this.callParent(arguments);
 
         items.push({
-            id: this.getId() + "-show",
-            xtype: "button",
-            text: _("Show"),
-            icon: "images/search.png",
-            iconCls: Ext.baseCSSPrefix + "btn-icon-16x16",
+            id: this.getId() + '-show',
+            xtype: 'button',
+            text: _('Show'),
+            icon: 'images/search.png',
+            iconCls: Ext.baseCSSPrefix + 'btn-icon-16x16',
             scope: this,
             handler: function() {
-                window.open("/webdav/", "_blank");
+                window.open('/webdav/', '_blank');
             }
         });
 
@@ -50,25 +50,25 @@ Ext.define("OMV.module.admin.service.webdav.Settings", {
     getFormItems: function() {
         var me = this;
         return [{
-            xtype: "fieldset",
-            title: _("General settings"),
+            xtype: 'fieldset',
+            title: _('General settings'),
             fieldDefaults: {
-                labelSeparator: ""
+                labelSeparator: ''
             },
             items: [{
-                xtype: "checkbox",
-                name: "enable",
-                fieldLabel: _("Enable"),
+                xtype: 'checkbox',
+                name: 'enable',
+                fieldLabel: _('Enable'),
                 checked: false
             }, {
-                xtype: "sharedfoldercombo",
-                name: "sharedfolderref",
-                fieldLabel: _("Shared folder"),
+                xtype: 'sharedfoldercombo',
+                name: 'sharedfolderref',
+                fieldLabel: _('Shared folder'),
                 allowNone: false
             }, {
-                xtype: "numberfield",
-                name: "upload_max",
-                fieldLabel: _("Filesize upload limit (MiB)"),
+                xtype: 'numberfield',
+                name: 'upload_max',
+                fieldLabel: _('Filesize upload limit (MiB)'),
                 minValue: 1,
                 value: 2
             }]
@@ -77,9 +77,9 @@ Ext.define("OMV.module.admin.service.webdav.Settings", {
 });
 
 OMV.WorkspaceManager.registerPanel({
-    id: "settings",
-    path: "/service/webdav",
-    text: _("Settings"),
+    id: 'settings',
+    path: '/service/webdav',
+    text: _('Settings'),
     position: 10,
-    className: "OMV.module.admin.service.webdav.Settings"
+    className: 'OMV.module.admin.service.webdav.Settings'
 });
