@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (C) 2015 OpenMediaVault Plugin Developers
+ * Copyright (C) 2015 OpenMediaVault Plugin Developers.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,8 +17,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once "Symfony/Component/ClassLoader/ClassLoader.php";
-require_once "Symfony/Component/ClassLoader/MapClassLoader.php";
+require_once 'openmediavault/autoloader.inc';
+require_once 'Symfony/Component/ClassLoader/ClassLoader.php';
+require_once 'Symfony/Component/ClassLoader/MapClassLoader.php';
 
 use Symfony\Component\ClassLoader\ClassLoader;
 use Symfony\Component\ClassLoader\MapClassLoader;
@@ -26,14 +27,12 @@ use Symfony\Component\ClassLoader\MapClassLoader;
 $loader = new ClassLoader();
 
 $loader->setUseIncludePath(true);
-
 $loader->register();
 
 $mapLoader = new MapClassLoader([
-    "OMVRpc" => "/usr/share/php/openmediavault/rpc.inc",
     // Normally we would add OMVWebDAV to the ClassLoader but we're only PSR-4
     // compliant and not PSR-0.
-    "OMVWebDAV\\Auth\\Openmediavault" => __DIR__."/../app/Auth/Openmediavault.php",
+    'OmvExtras\\WebDAV\\Auth\\Openmediavault' => __DIR__.'/../app/WebDAV/Auth/Openmediavault.php',
 ]);
 
 $mapLoader->register();

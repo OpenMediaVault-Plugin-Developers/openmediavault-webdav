@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (C) 2015 OpenMediaVault Plugin Developers
+ * Copyright (C) 2015 OpenMediaVault Plugin Developers.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OMVWebDAV\Auth;
+namespace OmvExtras\WebDAV\Auth;
 
-use OMVRpc;
+use OMV\Rpc\Rpc;
 use Sabre\DAV\Auth\Backend\AbstractBasic;
 
 /**
@@ -32,26 +32,21 @@ class Openmediavault extends AbstractBasic
      *
      * @param string $username
      * @param string $password
+     *
      * @return bool
      */
     public function validateUserPass($username, $password)
     {
         try {
-            $result = OMVRpc::exec(
-                "UserMgmt",
-                "authUser",
-                [
-                    "username" => $username,
-                    "password" => $password
-                ],
-                [
-                    "username" => "admin",
-                    "role" => OMV_ROLE_ADMINISTRATOR
-                ],
-                OMV_RPC_MODE_REMOTE
-            );
+            $result = Rpc::call('UserMgmt', 'authUser', [
+                'username' => $username,
+                'password' => $password,
+            ], [
+                'username' => 'admin',
+                'role' => OMV_ROLE_ADMINISTRATOR,
+            ], OMV_RPC_MODE_REMOTE);
 
-            if ($result["authenticated"]) {
+            if ($result['authenticated']) {
                 return true;
             }
         } catch (Exception $e) {

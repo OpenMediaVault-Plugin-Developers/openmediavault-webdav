@@ -1,39 +1,46 @@
 <?php
 
 /**
-* Copyright (C) 2013-2015 OpenMediaVault Plugin Developers
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Copyright (C) 2013-2015 OpenMediaVault Plugin Developers.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-require_once("openmediavault/config.inc");
-require_once("openmediavault/error.inc");
-require_once("openmediavault/notify.inc");
-require_once("openmediavault/rpcservice.inc");
+namespace OMV\Engined\Rpc;
 
-class OMVRpcServiceWebDav extends OMVRpcServiceAbstract
+use OMV\Config\Database;
+use OMV\Engine\Notify\Dispatcher;
+use OMV\Rpc\ServiceAbstract;
+
+class WebDav extends ServiceAbstract
 {
-    private $eventMessagePath = "org.openmediavault.services.webdav";
+    /** @var Database */
+    private $database;
 
-    /**
-    * Get the service configuration XPath.
-    *
-    * @return string
-    */
-    private function getXpath()
+    /** @var string */
+    private $dataModelPath = 'conf.service.webdav';
+
+    /** @var Dispatcher */
+    private $dispatcher;
+
+    /** @var string */
+    private $eventMessagePath = 'org.openmediavault.services.webdav';
+
+    public function __construct(Database $database = null, Dispatcher $dispatcher = null)
     {
-        return "/config/services/webdav";
+        $this->database = $database ?: Database::getInstance();
+        $this->dispatcher = $dispatcher ?: Dispatcher::getInstance();
     }
 
     /**
@@ -43,7 +50,7 @@ class OMVRpcServiceWebDav extends OMVRpcServiceAbstract
      */
     public function getName()
     {
-        return "WebDAV";
+        return 'WebDAV';
     }
 
     /**
@@ -53,110 +60,46 @@ class OMVRpcServiceWebDav extends OMVRpcServiceAbstract
      */
     public function initialize()
     {
-        $this->registerMethod("getSettings");
-        $this->registerMethod("setSettings");
+        $this->registerMethod('getSettings');
+        $this->registerMethod('setSettings');
     }
 
     /**
      * Get the settings of the service.
      *
-     * @param array $params The method paramaters.
+     * @param array $params  The method parameters.
      * @param array $context The context of the caller.
-     * @return array
      *
-     * @throws OMVException
+     * @return array
      */
     public function getSettings($params, $context)
     {
-        global $xmlConfig;
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
 
-        // Validate the RPC caller context.
-        $this->validateMethodContext($context, [
-            "role" => OMV_ROLE_ADMINISTRATOR
-        ]);
+        $object = $this->database->get($this->dataModelPath);
 
-        // Get the configuration object.
-        $object = $xmlConfig->get($this->getXpath());
-
-        if (is_null($object)) {
-            throw new OMVException(
-                OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED,
-                $this->getXpath()
-            );
-        }
-
-        // Modify the result object.
-        $object["enable"] = boolval($object["enable"]);
-        $object["upload_max"] = intval($object["upload_max"]);
-
-        return $object;
+        return $object->getAssoc();
     }
 
     /**
      * Set the settings of the service.
      *
-     * @param array $params The method paramaters.
+     * @param array $params  The method parameters.
      * @param array $context The context of the caller.
-     * @return array
      *
-     * @throws OMVException
+     * @return array
      */
     public function setSettings($params, $context)
     {
-        global $xmlConfig;
+        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
+        $this->validateMethodParams($params, 'rpc.webdav.setsettings');
 
-        // Validate the RPC caller context.
-        $this->validateMethodContext($context, [
-            "role" => OMV_ROLE_ADMINISTRATOR
-        ]);
+        $object = $this->database->get($this->dataModelPath);
+        $object->setAssoc($params);
 
-        // Validate the parameters of the RPC service method.
-        $this->validateMethodParams(
-            $params,
-            '{
-                "type": "object",
-                "properties": {
-                    "enable": { "type": "boolean" },
-                    "sharedfolderref": { "type": "string" },
-                    "upload_max": { "type": "integer", "minimum": 1 }
-                }
-            }'
-        );
+        $this->database->set($object);
+        $this->dispatcher->notify(OMV_NOTIFY_MODIFY, $this->eventMessagePath, $object);
 
-        // Get the existing configuration object.
-        $oldObject = $xmlConfig->get($this->getXpath());
-
-        if (is_null($oldObject)) {
-            throw new OMVException(
-                OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED,
-                $this->getXpath()
-            );
-        }
-
-        // Update the configuration object.
-        $object = [
-            "enable" => boolval($params["enable"]),
-            "sharedfolderref" => $params["sharedfolderref"],
-            "upload_max" => intval($params["upload_max"]),
-        ];
-
-        if ($xmlConfig->replace($this->getXpath(), $object) === false) {
-            throw new OMVException(OMVErrorMsg::E_CONFIG_SET_OBJECT_FAILED);
-        }
-
-        // Notify configuration changes.
-        $dispatcher = &OMVNotifyDispatcher::getInstance();
-        $dispatcher->notify(
-            OMV_NOTIFY_MODIFY,
-            $this->eventMessagePath,
-            $object
-        );
-
-        // Return the configuration object.
-        return $object;
+        return $object->getAssoc();
     }
 }
-
-// Register the RPC service.
-$rpcServiceMgr = &OMVRpcServiceMgr::getInstance();
-$rpcServiceMgr->registerService(new OMVRpcServiceWebDav());

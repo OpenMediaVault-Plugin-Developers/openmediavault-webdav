@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (C) 2015 OpenMediaVault Plugin Developers
+ * Copyright (C) 2015 OpenMediaVault Plugin Developers.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,27 +18,30 @@
  */
 
 // Require autoloader.
-require_once __DIR__."/../config/autoloader.php";
+require_once __DIR__.'/../config/autoloader.php';
+
+// Require OMV globals.
+require_once '/usr/share/php/openmediavault/globals.inc';
 
 // Load config.
-require_once __DIR__."/../config/config.php";
+require_once __DIR__.'/../config/config.php';
 
 // Create a new server with a public directory.
 $rootDirectory = new \Sabre\DAV\FS\Directory($publicDir);
 $server = new \Sabre\DAV\Server($rootDirectory);
 
 // Set up authentication.
-$authBackend = new \OMVWebDAV\Auth\Openmediavault();
-$authPlugin = new \Sabre\DAV\Auth\Plugin($authBackend, "OpenMediaVault WebDAV");
+$authBackend = new \OmvExtras\WebDAV\Auth\Openmediavault();
+$authPlugin = new \Sabre\DAV\Auth\Plugin($authBackend, 'OpenMediaVault WebDAV');
 
 // Set up WebDAV locks.
 $lockBackend = new \Sabre\DAV\Locks\Backend\File(
-    tempnam(sys_get_temp_dir(), "webdav")
+    tempnam(sys_get_temp_dir(), 'webdav')
 );
 $lockPlugin = new \Sabre\DAV\Locks\Plugin($lockBackend);
 
 // Set base URI.
-$server->setBaseUri("/webdav/");
+$server->setBaseUri('/webdav/');
 
 // Add plugins.
 $server->addPlugin($lockPlugin);

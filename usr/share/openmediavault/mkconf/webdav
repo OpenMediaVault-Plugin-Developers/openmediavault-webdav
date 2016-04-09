@@ -37,5 +37,5 @@ share_path=$(omv_get_sharedfolder_path "${sharedfolderref}")
 cat > "${OMV_WEBDAV_SERVER_CONF}" <<EOF
 <?php
 
-\$publicDir = "${share_path}";
+\$publicDir = '${share_path}';
 EOF
