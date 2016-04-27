@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 require_once 'openmediavault/autoloader.inc';
 require_once 'Symfony/Component/ClassLoader/ClassLoader.php';
 require_once 'Symfony/Component/ClassLoader/MapClassLoader.php';
@@ -32,7 +31,7 @@ $loader->register();
 $mapLoader = new MapClassLoader([
     // Normally we would add OMVWebDAV to the ClassLoader but we're only PSR-4
     // compliant and not PSR-0.
-    'OmvExtras\\WebDAV\\Auth\\Openmediavault' => __DIR__.'/../app/WebDAV/Auth/Openmediavault.php',
+    'OmvExtras\\WebDAV\\Auth\\Openmediavault' => __DIR__ . '/../app/WebDAV/Auth/Openmediavault.php',
 ]);
 
 $mapLoader->register();

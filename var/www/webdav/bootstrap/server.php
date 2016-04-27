@@ -18,13 +18,13 @@
  */
 
 // Require autoloader.
-require_once __DIR__.'/../config/autoloader.php';
+require_once __DIR__ . '/../config/autoloader.php';
 
 // Require OMV globals.
 require_once '/usr/share/php/openmediavault/globals.inc';
 
 // Load config.
-require_once __DIR__.'/../config/config.php';
+require_once __DIR__ . '/../config/config.php';
 
 // Create a new server with a public directory.
 $rootDirectory = new \Sabre\DAV\FS\Directory($publicDir);
