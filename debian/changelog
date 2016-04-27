@@ -1,10 +1,10 @@
-openmediavault-webdav (3.0.1) UNRELEASED; urgency=medium
+openmediavault-webdav (3.0.1) stable; urgency=medium
 
   * OMV 3.0.15 compatibility.
   * Add a service specific user and group to run the service with.
   * Only allow users in the webdav-users group and the admin to login.
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 09 Apr 2016 23:14:43 +0200
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 27 Apr 2016 16:31:25 +0200
 
 openmediavault-webdav (3.0) stable; urgency=low
 
