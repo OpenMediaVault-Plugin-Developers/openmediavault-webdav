@@ -29,10 +29,10 @@ class WebDav extends ServiceAbstract implements
     IListener
 {
     /** @var string */
-    private $eventMessagePath = 'org.openmediavault.services.webdav';
+    private $eventMessagePath = 'org.openmediavault.conf.service.webdav';
 
     /** @var string */
-    private $sharedFolderEventMessagePath = 'org.openmediavault.system.shares.sharedfolder';
+    private $sharedFolderEventMessagePath = 'org.openmediavault.conf.system.sharedfolder';
 
     /**
      * Get the module name.

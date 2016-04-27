@@ -35,7 +35,7 @@ class WebDav extends ServiceAbstract
     private $dispatcher;
 
     /** @var string */
-    private $eventMessagePath = 'org.openmediavault.services.webdav';
+    private $eventMessagePath = 'org.openmediavault.conf.service.webdav';
 
     public function __construct(Database $database = null, Dispatcher $dispatcher = null)
     {
