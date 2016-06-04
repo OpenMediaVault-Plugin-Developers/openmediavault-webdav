@@ -18,6 +18,7 @@
 // require("js/omv/WorkspaceManager.js")
 // require("js/omv/form/field/SharedFolderComboBox.js")
 // require("js/omv/workspace/form/Panel.js")
+// require("js/omvextras/form/field/plugin/PermissionsInfo.js")
 
 Ext.define('OMV.module.admin.service.webdav.Settings', {
     extend: 'OMV.workspace.form.Panel',
@@ -59,12 +60,27 @@ Ext.define('OMV.module.admin.service.webdav.Settings', {
                 xtype: 'checkbox',
                 name: 'enable',
                 fieldLabel: _('Enable'),
-                checked: false
+                checked: false,
+                plugins: [{
+                    ptype: 'fieldinfo',
+                    text: _('Only users that are members of the \'webdav-users\' group will be permitted to use WebDAV.')
+                }]
             }, {
                 xtype: 'sharedfoldercombo',
                 name: 'sharedfolderref',
                 fieldLabel: _('Shared folder'),
-                allowNone: false
+                allowNone: false,
+                plugins: [{
+                    ptype: 'fieldinfo',
+                    text: _('Make sure the user \'webdav\' has read and write access to the shared folder.')
+                }, {
+                    ptype: 'permissionsinfo',
+                    username: 'webdav',
+                    execute: true,
+                    read: true,
+                    write: true
+
+                }]
             }, {
                 xtype: 'numberfield',
                 name: 'upload_max',
