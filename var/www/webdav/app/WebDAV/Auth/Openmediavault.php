@@ -45,7 +45,7 @@ class Openmediavault extends AbstractBasic
         $result = Rpc::call('UserMgmt', 'authUser', [
             'username' => $username,
             'password' => $password,
-        ], $omvRpcContext, OMV_RPC_MODE_REMOTE);
+        ], $omvRpcContext, Rpc::MODE_REMOTE);
 
         if (!$result['authenticated']) {
             return false;
@@ -53,7 +53,7 @@ class Openmediavault extends AbstractBasic
 
         $user = Rpc::call('UserMgmt', 'getUser', [
             'name' => $username,
-        ], $omvRpcContext, OMV_RPC_MODE_REMOTE);
+        ], $omvRpcContext, Rpc::MODE_REMOTE);
 
         // Only allow admin or users in the webdav-users group.
         if ($username === 'admin' || in_array('webdav-users', $user['groups'])) {
