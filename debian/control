@@ -10,7 +10,7 @@ Package: openmediavault-webdav
 Architecture: all
 Depends: adduser,
          omvextras-common,
-         openmediavault (>= 3.0.21),
+         openmediavault (>= 3.0.26),
          php-sabre-dav,
          php-symfony-class-loader,
          ${misc:Depends}

@@ -1,3 +1,9 @@
+openmediavault-webdav (3.0.3) stable; urgency=medium
+
+  * OMV 3.0.26 compatiblity.
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 27 Sep 2016 13:44:26 +0900
+
 openmediavault-webdav (3.0.2) stable; urgency=medium
 
   * OMV 3.0.21 compatiblity.
