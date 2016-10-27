@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# okpail <okpail@gmail.com>, 2014
+# okpail <okpail@gmail.com>, 2014,2016
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-15 07:35-0600\n"
-"PO-Revision-Date: 2016-02-15 13:36+0000\n"
+"POT-Creation-Date: 2016-10-27 06:58-0500\n"
+"PO-Revision-Date: 2016-10-27 11:58+0000\n"
 "Last-Translator: Aaron Murray <aaronmurray27@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -22,19 +22,28 @@ msgid "Enable"
 msgstr "Aanzetten"
 
 msgid "Filesize upload limit (MiB)"
-msgstr ""
+msgstr "Filegrootte upload limiet (MiB)"
 
 msgid "General settings"
 msgstr "Algemene instellingen"
+
+msgid ""
+"Make sure the user 'webdav' has read and write access to the shared folder."
+msgstr ""
+
+msgid ""
+"Only users that are members of the 'webdav-users' group will be permitted to"
+" use WebDAV."
+msgstr ""
 
 msgid "Settings"
 msgstr "Instellinge"
 
 msgid "Shared folder"
-msgstr ""
+msgstr "Gedeelde folder"
 
 msgid "Show"
-msgstr ""
+msgstr "Toon"
 
 msgid "WebDAV"
 msgstr "WebDAV"
