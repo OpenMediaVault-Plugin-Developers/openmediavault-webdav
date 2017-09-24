@@ -7,17 +7,6 @@ set -e
 
 case "$1" in
     configure)
-        SERVICE_XPATH_NAME="webdav"
-        SERVICE_XPATH="/config/services/${SERVICE_XPATH_NAME}"
-
-        # Add the default configuration
-        if ! omv_config_exists "${SERVICE_XPATH}"; then
-            omv_config_add_element "/config/services" "${SERVICE_XPATH_NAME}"
-            omv_config_add_element "${SERVICE_XPATH}" "enable" "0"
-            omv_config_add_element "${SERVICE_XPATH}" "sharedfolderref"
-            omv_config_add_element "${SERVICE_XPATH}" "upload_max" "2"
-        fi
-
         # Add a webdav-users group.
         addgroup --quiet \
                  --system \
@@ -37,6 +26,13 @@ case "$1" in
 
         dpkg-trigger update-fixperms
         dpkg-trigger update-locale
+
+        # Initialize and migrate configuration database.
+        echo "Updating configuration database ..."
+        omv-confdbadm create "conf.service.webdav"
+        if [ -n "$2" ]; then
+            omv-confdbadm migrate "conf.service.webdav" "${2}"
+        fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
