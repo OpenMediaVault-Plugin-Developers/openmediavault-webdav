@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2013-2015 OpenMediaVault Plugin Developers
+# Copyright (C) 2013-2017 OpenMediaVault Plugin Developers
 #
 # This file is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ location /webdav {
     location ~ \.php\$ {
         include fastcgi.conf;
         fastcgi_param SCRIPT_FILENAME \$request_filename;
-        fastcgi_pass unix:/var/run/php5-fpm-openmediavault-webdav.sock;
+        fastcgi_pass unix:/var/run/php-fpm-openmediavault-webdav.sock;
     }
 
     location = /webdav/favicon.ico {

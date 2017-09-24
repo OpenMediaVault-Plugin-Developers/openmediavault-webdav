@@ -5,7 +5,7 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-OMV_WEBDAV_POOL_CONF="/etc/php5/fpm/pool.d/openmediavault-webdav.conf"
+OMV_WEBDAV_POOL_CONF="/etc/php/7.0/fpm/pool.d/openmediavault-webdav.conf"
 OMV_WEBDAV_SERVER_CONF="/var/www/webdav/config/config.php"
 OMV_WEBDAV_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
 
