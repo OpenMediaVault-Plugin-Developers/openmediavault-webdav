@@ -1,0 +1,7 @@
+version: "1.0"
+type: navigation-item
+data:
+  path: "services.webdav"
+  text: _("WebDAV")
+  icon: "mdi:file-upload-outline"
+  url: "/services/webdav"

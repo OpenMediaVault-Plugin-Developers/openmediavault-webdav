@@ -5,31 +5,25 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-OMV_WEBDAV_POOL_CONF="/etc/php/7.0/fpm/pool.d/openmediavault-webdav.conf"
-OMV_WEBDAV_SERVER_CONF="/var/www/webdav/config/config.php"
 OMV_WEBDAV_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
 
-case "$1" in
+remove_action() {
+    dpkg-trigger update-workbench
+}
 
+case "$1" in
     purge)
+        remove_action
         omv_config_delete "/config/services/webdav"
     ;;
 
     remove)
-        if [ -e "${OMV_WEBDAV_POOL_CONF}" ]; then
-            rm "${OMV_WEBDAV_POOL_CONF}"
-        fi
-
-        if [ -e "${OMV_WEBDAV_SERVER_CONF}" ]; then
-            rm "${OMV_WEBDAV_SERVER_CONF}"
-        fi
-
+        remove_action
         if [ -e "${OMV_WEBDAV_SITE_CONF}" ]; then
             rm "${OMV_WEBDAV_SITE_CONF}"
         fi
 
         deb-systemd-invoke reload nginx.service >/dev/null || true
-        deb-systemd-invoke reload php5-fpm.service >/dev/null || true
     ;;
 
     upgrade|failed-upgrade|abort-install|abort-upgrade|disappear|remove)

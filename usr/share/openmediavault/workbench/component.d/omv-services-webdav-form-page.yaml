@@ -1,0 +1,23 @@
+version: "1.0"
+type: component
+data:
+  name: omv-services-webdav-form-page
+  type: formPage
+  config:
+    request:
+      service: WebDav
+      get:
+        method: get
+      post:
+        method: set
+    fields:
+      - type: checkbox
+        name: enable
+        label: _("Enable")
+        value: false
+      - type: sharedFolderSelect
+        name: sharedfolderref
+        label: _("Shared folder")
+        hasEmptyOption: true
+    buttons:
+      - template: submit

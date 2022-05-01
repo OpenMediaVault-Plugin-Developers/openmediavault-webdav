@@ -1,3 +1,9 @@
+openmediavault-webdav (6.0) UNRELEASED; urgency=medium
+
+  * Update for OMV 6.x
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 01 May 2022 10:42:04 -0500
+
 openmediavault-webdav (4.0) stable; urgency=low
 
   * Update for OMV 4.x

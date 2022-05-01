@@ -1,6 +1,6 @@
 [{
     "type": "rpc",
-    "id": "rpc.webdav.setsettings",
+    "id": "rpc.webdav.set",
     "params": {
         "type": "object",
         "properties": {
@@ -17,11 +17,6 @@
                     "type": "string",
                     "maxLength": 0
                 }],
-                "required": true
-            },
-            "upload_max": {
-                "type": "integer",
-                "minimum": 1,
                 "required": true
             }
         }

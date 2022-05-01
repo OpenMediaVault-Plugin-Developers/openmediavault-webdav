@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Copyright (C) 2013-2017 OpenMediaVault Plugin Developers.
+ * Copyright (C) 2009-2013 Volker Theile <volker.theile@openmediavault.org>
+ * Copyright (C) 2013-2022 OpenMediaVault Plugin Developers
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,80 +18,30 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OMV\Engined\Module;
-
-use OMV\Engine\Module\Manager as ModuleManager;
-use OMV\Engine\Module\ServiceAbstract;
-use OMV\Engine\Notify\Dispatcher;
-use OMV\Engine\Notify\IListener;
-use OMV\System\Process;
-
-class WebDav extends ServiceAbstract implements
-    IListener
+class OMVModuleWebdav extends \OMV\Engine\Module\ServiceAbstract
+    implements \OMV\Engine\Notify\IListener
 {
-    /** @var string */
-    private $eventMessagePath = 'org.openmediavault.conf.service.webdav';
-
-    /** @var string */
-    private $sharedFolderEventMessagePath = 'org.openmediavault.conf.system.sharedfolder';
-
-    /**
-     * Get the module name.
-     *
-     * @return string
-     */
     public function getName()
     {
-        return 'webdav';
+        return "webdav";
     }
 
-    /**
-     * Create and update the configuration.
-     *
-     * @return void
-     *
-     * @throws OMVException
-     */
-    public function applyConfig()
+    public function bindListeners(\OMV\Engine\Notify\Dispatcher $dispatcher)
     {
-        $cmd = new Process('omv-mkconf', $this->getName());
-        $cmd->setRedirect2to1();
-        $cmd->execute();
-    }
-
-    /**
-     * Bind listeners.
-     *
-     * @param Dispatcher $dispatcher
-     *
-     * @return void
-     */
-    public function bindListeners(Dispatcher $dispatcher)
-    {
-        $moduleManager = ModuleManager::getInstance();
-
         $dispatcher->addListener(
             OMV_NOTIFY_MODIFY,
-            $this->eventMessagePath,
-            [$this, 'setDirty']
+            "org.openmediavault.conf.service.webdav",
+            [ $this, "setDirty" ]
         );
-
         $dispatcher->addListener(
             OMV_NOTIFY_MODIFY,
-            $this->eventMessagePath,
-            [$moduleManager->getModule('phpfpm'), 'setDirty']
+            "org.openmediavault.conf.system.sharedfolder",
+            [ $this, "setDirty" ]
         );
-
         $dispatcher->addListener(
             OMV_NOTIFY_MODIFY,
-            $this->eventMessagePath,
-            [$moduleManager->getModule('webserver'), 'setDirty']
-        );
-
-        $dispatcher->addListener(
-            OMV_NOTIFY_MODIFY,
-            $this->sharedFolderEventMessagePath,
-            [$this, 'setDirty']
+            "org.openmediavault.conf.system.sharedfolder.privilege",
+            [ $this, "setDirty" ]
         );
     }
 }

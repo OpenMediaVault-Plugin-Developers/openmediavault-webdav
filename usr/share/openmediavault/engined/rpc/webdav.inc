@@ -1,7 +1,7 @@
 <?php
-
 /**
- * Copyright (C) 2013-2017 OpenMediaVault Plugin Developers.
+ * Copyright (C) 2009-2013 Volker Theile <volker.theile@openmediavault.org>
+ * Copyright (C) 2013-2022 OpenMediaVault Plugin Developers
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,80 +17,41 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace OMV\Engined\Rpc;
-
-use OMV\Config\Database;
-use OMV\Rpc\ServiceAbstract;
-
-class WebDav extends ServiceAbstract
+class OMVRpcServiceWebdav extends \OMV\Rpc\ServiceAbstract
 {
-    /** @var Database */
-    private $database;
-
-    /** @var string */
-    private $dataModelPath = 'conf.service.webdav';
-
-    public function __construct(Database $database = null)
-    {
-        $this->database = $database ?: Database::getInstance();
-    }
-
-    /**
-     * Get the name of the RPC service.
-     *
-     * @return string
-     */
     public function getName()
     {
-        return 'WebDAV';
+        return "WebDAV";
     }
 
-    /**
-     * Initialize the RPC service.
-     *
-     * @return void
-     */
     public function initialize()
     {
-        $this->registerMethod('getSettings');
-        $this->registerMethod('setSettings');
+        $this->registerMethod("get");
+        $this->registerMethod("set");
     }
 
-    /**
-     * Get the settings of the service.
-     *
-     * @param array $params  The method parameters.
-     * @param array $context The context of the caller.
-     *
-     * @return array
-     */
-    public function getSettings($params, $context)
+    public function get($params, $context)
     {
-        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
-
-        $object = $this->database->get($this->dataModelPath);
-
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Get the configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->get("conf.service.webdav");
         return $object->getAssoc();
     }
 
-    /**
-     * Set the settings of the service.
-     *
-     * @param array $params  The method parameters.
-     * @param array $context The context of the caller.
-     *
-     * @return array
-     */
-    public function setSettings($params, $context)
+    public function set($params, $context)
     {
-        $this->validateMethodContext($context, ['role' => OMV_ROLE_ADMINISTRATOR]);
-        $this->validateMethodParams($params, 'rpc.webdav.setsettings');
-
-        $object = $this->database->get($this->dataModelPath);
+        // Validate the RPC caller context.
+        $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
+        // Validate the parameters of the RPC service method.
+        $this->validateMethodParams($params, "rpc.webdav.set");
+        // Get the existing configuration object.
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->get("conf.service.webdav");
         $object->setAssoc($params);
-
-        $this->database->set($object);
-
+        $db->set($object);
+        // Return the configuration object.
         return $object->getAssoc();
     }
 }

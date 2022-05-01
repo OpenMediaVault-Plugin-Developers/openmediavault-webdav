@@ -1,0 +1,6 @@
+version: "1.0"
+type: route
+data:
+  url: "/services/webdav"
+  title: _("WebDAV")
+  component: omv-services-webdav-form-page

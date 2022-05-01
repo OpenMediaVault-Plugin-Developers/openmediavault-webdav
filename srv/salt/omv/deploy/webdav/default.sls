@@ -1,10 +1,6 @@
-#!/bin/sh
-#
 # @license   http://www.gnu.org/licenses/gpl.html GPL Version 3
-# @author    Volker Theile <volker.theile@openmediavault.org>
 # @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-# @copyright Copyright (c) 2009-2013 Volker Theile
-# @copyright Copyright (c) 2013-2022 OpenMediaVault Plugin Developers
+# @copyright Copyright (c) 2019-2022 OpenMediaVault Plugin Developers
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,17 +15,26 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-set -e
+{% set config = salt['omv_conf.get']('conf.service.webdav') %}
+{% set confFile = '/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf' %}
+{% if config.enable | to_bool %}
 
-. /usr/share/openmediavault/scripts/helper-functions
+configure_webdav:
+  file.managed:
+    - name: "{{ confFile }}"
+    - source:
+      - salt://{{ tpldir }}/files/webdav_conf.j2
+    - template: jinja
+    - context:
+        config: {{ config | json }}
+    - user: root
+    - group: root
+    - mode: 644
 
-SERVICE_XPATH_NAME="webdav"
-SERVICE_XPATH="/config/services/${SERVICE_XPATH_NAME}"
+{% else %}
 
-if ! omv_config_exists "${SERVICE_XPATH}"; then
-    omv_config_add_node "/config/services" "${SERVICE_XPATH_NAME}"
-    omv_config_add_key "${SERVICE_XPATH}" "enable" "0"
-    omv_config_add_key "${SERVICE_XPATH}" "sharedfolderref" ""
-fi
+remove_webdav_conf_file:
+  file.absent:
+    - name: "{{ confFile }}"
 
-exit 0
+{% endif %}
