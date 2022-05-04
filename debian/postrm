@@ -6,6 +6,8 @@ set -e
 . /usr/share/openmediavault/scripts/helper-functions
 
 OMV_WEBDAV_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
+OMV_WEBDAV_PAM_CONF="/etc/pam.d/openmediavault-webdav"
+OMV_WEBDAV_ALLOW_CONF="/etc/openmediavault-webdev.group.allow"
 
 remove_action() {
     dpkg-trigger update-workbench
@@ -21,6 +23,12 @@ case "$1" in
         remove_action
         if [ -e "${OMV_WEBDAV_SITE_CONF}" ]; then
             rm "${OMV_WEBDAV_SITE_CONF}"
+        fi
+        if [ -e "${OMV_WEBDAV_PAM_CONF}" ]; then
+            rm "${OMV_WEBDAV_PAM_CONF}"
+        fi
+        if [ -e "${OMV_WEBDAV_ALLOW_CONF}" ]; then
+            rm "${OMV_WEBDAV_ALLOW_CONF}"
         fi
 
         deb-systemd-invoke reload nginx.service >/dev/null || true

@@ -17,16 +17,47 @@
 
 {% set config = salt['omv_conf.get']('conf.service.webdav') %}
 {% set confFile = '/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf' %}
+{% set pamFile = '/etc/pam.d/openmediavault-webdav' %}
+{% set allowFile = '/etc/openmediavault-webdev.group.allow' %}
+
 {% if config.enable | to_bool %}
+
+{% set sfpath = salt['omv_conf.get_sharedfolder_path'](config.sharedfolderref) %}
 
 configure_webdav:
   file.managed:
     - name: "{{ confFile }}"
-    - source:
-      - salt://{{ tpldir }}/files/webdav_conf.j2
-    - template: jinja
-    - context:
-        config: {{ config | json }}
+    - contents: |
+        location /webdav {
+            root {{ sfpath }};
+            dav_methods PUT DELETE MKCOL COPY MOVE;
+            dav_ext_methods PROPFIND OPTIONS;
+            dav_access  user:rw group:rw;
+            create_full_put_path on;
+            client_body_temp_path /srv/client_temp;
+            autoindex on;
+            auth_pam "PAM Authentication";
+            auth_pam_service_name "openmediavault-webdav";
+        }
+    - user: root
+    - group: root
+    - mode: 644
+
+configure_webdav_pam:
+  file.managed:
+    - name: "{{ pamFile }}"
+    - contents: |
+        auth required pam_listfile.so onerr=fail item=group sense=allow file={{ allowFile }}
+        @include common-auth
+    - user: root
+    - group: root
+    - mode: 644
+
+configure_pam_allow:
+  file.managed:
+    - name: "{{ allowFile }}"
+    - contents: |
+        {{ config.grpname }}
     - user: root
     - group: root
     - mode: 644
@@ -35,6 +66,9 @@ configure_webdav:
 
 remove_webdav_conf_file:
   file.absent:
-    - name: "{{ confFile }}"
+    - names:
+      - "{{ confFile }}"
+      - "{{ pamFile }}"
+      - "{{ allowFile }}"
 
 {% endif %}

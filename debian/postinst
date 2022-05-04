@@ -15,6 +15,11 @@ case "$1" in
         if [ -n "$2" ]; then
             omv-confdbadm migrate "conf.service.webdav" "${2}"
         fi
+
+        # create webdav-users group if it doesn't exist
+        if ! getent group webdav-users >/dev/null 2>&1; then
+            groupadd webdav-users
+        fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

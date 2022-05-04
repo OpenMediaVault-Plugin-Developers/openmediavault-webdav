@@ -28,6 +28,11 @@ class OMVModuleWebdav extends \OMV\Engine\Module\ServiceAbstract
 
     public function bindListeners(\OMV\Engine\Notify\Dispatcher $dispatcher)
     {
+        $moduleMngr = \OMV\Engine\Module\Manager::getInstance();
+        $dispatcher->addListener(
+            OMV_NOTIFY_MODIFY,
+            "org.openmediavault.conf.service.webdav",
+            [$moduleMngr->getModule("webserver"), "setDirty"]);
         $dispatcher->addListener(
             OMV_NOTIFY_MODIFY,
             "org.openmediavault.conf.service.webdav",

@@ -1,24 +1,36 @@
-[{
-    "type": "rpc",
-    "id": "rpc.webdav.set",
-    "params": {
-        "type": "object",
-        "properties": {
-            "enable": {
-                "type": "boolean",
-                "required": true
-            },
-            "sharedfolderref": {
-                "type": "string",
-                "oneOf": [{
+[
+    {
+        "type": "rpc",
+        "id": "rpc.webdav.set",
+        "params": {
+            "type": "object",
+            "properties": {
+                "enable": {
+                    "type": "boolean",
+                    "required": true
+                },
+                "sharedfolderref": {
                     "type": "string",
-                    "format": "uuidv4"
-                }, {
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "format": "uuidv4"
+                        },
+                        {
+                            "type": "string",
+                            "maxLength": 0
+                        }
+                    ],
+                    "required": true
+                },
+                "grpname": {
                     "type": "string",
-                    "maxLength": 0
-                }],
-                "required": true
+                    "required": true
+                },
+                "extraoptions": {
+                    "type": "string"
+                }
             }
         }
     }
-}]
+]

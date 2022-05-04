@@ -19,5 +19,27 @@ data:
         name: sharedfolderref
         label: _("Shared folder")
         hasEmptyOption: true
+      - type: select
+        name: grpname
+        label: _("Group")
+        placeholder: _("Select a group ...")
+        hint: _("This option specifies the group that has access.")
+        value: "webdav-users"
+        valueField: name
+        textField: name
+        store:
+          proxy:
+            service: UserMgmt
+            get:
+              method: enumerateGroups
+          sorters:
+            - dir: asc
+              prop: name
+      - type: textarea
+        name: extraoptions
+        label: _("Extra options")
+        value: ""
+        rows: 3
+        hint: _("extra nginx config lines")
     buttons:
       - template: submit
