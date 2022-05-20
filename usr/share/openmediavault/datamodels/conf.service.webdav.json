@@ -25,6 +25,10 @@
             ],
             "default": ""
         },
+        "auth": {
+            "type": "boolean",
+            "default": true
+        },
         "grpname": {
             "type": "string",
             "default": "webdav-users"

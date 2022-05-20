@@ -35,13 +35,17 @@ configure_webdav:
             dav_access  user:rw group:rw;
             create_full_put_path on;
             client_body_temp_path /srv/client_temp;
-            autoindex on;
+            {% if config.auth | to_bool -%}
             auth_pam "PAM Authentication";
             auth_pam_service_name "openmediavault-webdav";
+            {% endif -%}
+            autoindex on;
         }
     - user: root
     - group: root
     - mode: 644
+
+{% if config.auth | to_bool %}
 
 configure_webdav_pam:
   file.managed:
@@ -64,7 +68,17 @@ configure_pam_allow:
 
 {% else %}
 
-remove_webdav_conf_file:
+remove_webdav_auth_files:
+  file.absent:
+    - names:
+      - "{{ pamFile }}"
+      - "{{ allowFile }}"
+
+{% endif %}
+
+{% else %}
+
+remove_webdav_conf_files:
   file.absent:
     - names:
       - "{{ confFile }}"

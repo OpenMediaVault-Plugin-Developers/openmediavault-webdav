@@ -23,9 +23,12 @@
                     ],
                     "required": true
                 },
-                "grpname": {
-                    "type": "string",
+                "auth": {
+                    "type": "boolean",
                     "required": true
+                },
+                "grpname": {
+                    "type": "string"
                 },
                 "extraoptions": {
                     "type": "string"

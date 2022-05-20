@@ -19,10 +19,20 @@ data:
         name: sharedfolderref
         label: _("Shared folder")
         hasEmptyOption: true
+      - type: checkbox
+        name: auth
+        label: _("Use auth")
+        value: false
       - type: select
         name: grpname
         label: _("Group")
         placeholder: _("Select a group ...")
+        modifiers:
+          - type: visible
+            constraint:
+              operator: truthy
+              arg0:
+                prop: auth
         hint: _("This option specifies the group that has access.")
         value: "webdav-users"
         valueField: name
