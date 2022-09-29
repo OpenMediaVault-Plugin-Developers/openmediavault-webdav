@@ -3,4 +3,6 @@ type: route
 data:
   url: "/services/webdav"
   title: _("WebDAV")
+  editing: true
+  notificationTitle: _("Updated WebDAV settings.")
   component: omv-services-webdav-form-page
