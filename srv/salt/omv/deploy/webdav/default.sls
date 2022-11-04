@@ -86,3 +86,9 @@ remove_webdav_conf_files:
       - "{{ allowFile }}"
 
 {% endif %}
+
+reload_nginx_service:
+  service.running:
+    - name: nginx
+    - enable: True
+    - reload: True

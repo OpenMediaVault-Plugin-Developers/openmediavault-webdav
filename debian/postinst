@@ -20,6 +20,11 @@ case "$1" in
         if ! getent group webdav-users >/dev/null 2>&1; then
             groupadd webdav-users
         fi
+
+        # add www-data to shadow group if not a member
+        if ! groups www-data | grep -qw shadow; then
+            usermod -a -G shadow www-data
+        fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
