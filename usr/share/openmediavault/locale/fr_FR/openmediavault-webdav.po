@@ -1,37 +1,51 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the openmediavault-webdav package.
 # 
 # Translators:
+# Aaron Murray <aaronmurray27@gmail.com>, 2016
+# Axel Cantenys, 2017
 # Zacharie ARNAISE <spacebrain.damage@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-14 14:07-0600\n"
-"PO-Revision-Date: 2014-11-14 19:52+0000\n"
-"Last-Translator: Aaron Murray <aaron27@ryecoinc.com>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/openmediavault-webdav/language/fr/)\n"
+"POT-Creation-Date: 2022-11-04 07:35-0500\n"
+"PO-Revision-Date: 2013-10-28 15:04+0000\n"
+"Last-Translator: Axel Cantenys, 2017\n"
+"Language-Team: French (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Enable"
 msgstr "Activer"
 
-msgid "General settings"
-msgstr "Paramètres généraux"
+msgid "Extra options"
+msgstr ""
 
-msgid "Settings"
-msgstr "Paramètres"
+msgid "Group"
+msgstr ""
 
-msgid "Shared Folder"
+msgid "Select a group ..."
+msgstr ""
+
+msgid "Shared folder"
 msgstr "Dossier partagé"
 
-msgid "This share will have ownership changed to www-data:users."
-msgstr "Ce partage verra son propriétaire changé à www-data:users."
+msgid "This option specifies the group that has access."
+msgstr ""
+
+msgid "Updated WebDAV settings."
+msgstr ""
+
+msgid "Use auth"
+msgstr ""
 
 msgid "WebDAV"
-msgstr "XebDAV"
+msgstr "WebDAV"
+
+msgid "extra nginx config lines"
+msgstr ""

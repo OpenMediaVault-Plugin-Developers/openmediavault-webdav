@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the openmediavault-webdav package.
 # 
 # Translators:
 # Stefan Thrane Overby <stoverby@gmail.com>, 2013,2016
@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-27 06:58-0500\n"
-"PO-Revision-Date: 2016-10-27 11:58+0000\n"
-"Last-Translator: Aaron Murray <aaronmurray27@gmail.com>\n"
+"POT-Creation-Date: 2022-11-04 07:35-0500\n"
+"PO-Revision-Date: 2013-10-28 15:04+0000\n"
+"Last-Translator: Stefan Thrane Overby <stoverby@gmail.com>, 2013,2016\n"
 "Language-Team: Danish (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,29 +21,29 @@ msgstr ""
 msgid "Enable"
 msgstr "Aktiver"
 
-msgid "Filesize upload limit (MiB)"
-msgstr "Filstørrelse upload begrænsning (MiB)"
-
-msgid "General settings"
-msgstr "Generelle indstillinger"
-
-msgid ""
-"Make sure the user 'webdav' has read and write access to the shared folder."
+msgid "Extra options"
 msgstr ""
 
-msgid ""
-"Only users that are members of the 'webdav-users' group will be permitted to"
-" use WebDAV."
+msgid "Group"
 msgstr ""
 
-msgid "Settings"
-msgstr "Indstillinger"
+msgid "Select a group ..."
+msgstr ""
 
 msgid "Shared folder"
 msgstr "Delt mappe"
 
-msgid "Show"
-msgstr "VIs"
+msgid "This option specifies the group that has access."
+msgstr ""
+
+msgid "Updated WebDAV settings."
+msgstr ""
+
+msgid "Use auth"
+msgstr ""
 
 msgid "WebDAV"
 msgstr "WebDAV"
+
+msgid "extra nginx config lines"
+msgstr ""
