@@ -1,3 +1,9 @@
+openmediavault-webdav (6.0.1) stable; urgency=low
+
+  * Create webdav subfolder
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 06 Nov 2022 12:50:21 -0600
+
 openmediavault-webdav (6.0) stable; urgency=low
 
   * Update for OMV 6.x
