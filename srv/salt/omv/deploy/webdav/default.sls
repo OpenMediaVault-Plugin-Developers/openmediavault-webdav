@@ -24,6 +24,13 @@
 
 {% set sfpath = salt['omv_conf.get_sharedfolder_path'](config.sharedfolderref) %}
 
+configure_sftp_root_dir:
+  file.directory:
+    - name: "{{ sfpath }}/webdav"
+    - user: www-data
+    - group: "{{ config.grpname }}"
+    - mode: 770
+
 configure_webdav:
   file.managed:
     - name: "{{ confFile }}"
