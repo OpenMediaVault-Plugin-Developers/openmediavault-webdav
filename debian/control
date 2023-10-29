@@ -2,13 +2,13 @@ Source: openmediavault-webdav
 Section: net
 Priority: optional
 Maintainer: OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-Build-Depends: debhelper (>= 12)
+Build-Depends: debhelper (>= 13)
 Standards-Version: 4.3.0
 XB-Plugin-Section: filesystems
 
 Package: openmediavault-webdav
 Architecture: all
-Depends: openmediavault (>= 6.0.25),
+Depends: openmediavault (>= 7),
          libnginx-mod-http-auth-pam,
          libnginx-mod-http-dav-ext,
          ${misc:Depends}
