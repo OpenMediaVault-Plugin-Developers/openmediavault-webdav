@@ -4,15 +4,15 @@
 # 
 # Translators:
 # David Hönel <davidh1990@gmx.de>, 2013
-# Ettore Atalan <atalanttore@googlemail.com>, 2016,2020
+# Ettore Atalan <atalanttore@googlemail.com>, 2016,2020,2022
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-04 07:35-0500\n"
 "PO-Revision-Date: 2013-10-28 15:04+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016,2020\n"
-"Language-Team: German (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/de/)\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016,2020,2022\n"
+"Language-Team: German (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,10 +23,10 @@ msgid "Enable"
 msgstr "Aktivieren"
 
 msgid "Extra options"
-msgstr ""
+msgstr "Zusätzliche Optionen"
 
 msgid "Group"
-msgstr ""
+msgstr "Gruppe"
 
 msgid "Select a group ..."
 msgstr ""
@@ -38,7 +38,7 @@ msgid "This option specifies the group that has access."
 msgstr ""
 
 msgid "Updated WebDAV settings."
-msgstr ""
+msgstr "Aktualisierte WebDAV-Einstellungen."
 
 msgid "Use auth"
 msgstr ""

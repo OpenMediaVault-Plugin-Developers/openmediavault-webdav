@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the openmediavault-webdav package.
 # 
 # Translators:
-# Andi Chandler <andi@gowling.com>, 2015-2017
+# Andi Chandler <andi@gowling.com>, 2015-2017,2023
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-04 07:35-0500\n"
 "PO-Revision-Date: 2013-10-28 15:04+0000\n"
-"Last-Translator: Andi Chandler <andi@gowling.com>, 2015-2017\n"
-"Language-Team: English (United Kingdom) (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/en_GB/)\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>, 2015-2017,2023\n"
+"Language-Team: English (United Kingdom) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,28 +22,28 @@ msgid "Enable"
 msgstr "Enable"
 
 msgid "Extra options"
-msgstr ""
+msgstr "Extra options"
 
 msgid "Group"
-msgstr ""
+msgstr "Group"
 
 msgid "Select a group ..."
-msgstr ""
+msgstr "Select a group ..."
 
 msgid "Shared folder"
 msgstr "Shared folder"
 
 msgid "This option specifies the group that has access."
-msgstr ""
+msgstr "This option specifies the group that has access."
 
 msgid "Updated WebDAV settings."
-msgstr ""
+msgstr "Updated WebDAV settings."
 
 msgid "Use auth"
-msgstr ""
+msgstr "Use auth"
 
 msgid "WebDAV"
 msgstr "WebDAV"
 
 msgid "extra nginx config lines"
-msgstr ""
+msgstr "extra nginx config lines"

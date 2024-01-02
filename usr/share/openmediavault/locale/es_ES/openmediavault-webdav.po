@@ -3,47 +3,47 @@
 # This file is distributed under the same license as the openmediavault-webdav package.
 # 
 # Translators:
-# Raul Fernandez Garcia <raulfg3@gmail.com>, 2014,2016
+# Raul Fernandez Garcia <raulfg3@gmail.com>, 2014,2016,2022
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-04 07:35-0500\n"
 "PO-Revision-Date: 2013-10-28 15:04+0000\n"
-"Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2014,2016\n"
-"Language-Team: Spanish (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/es/)\n"
+"Last-Translator: Raul Fernandez Garcia <raulfg3@gmail.com>, 2014,2016,2022\n"
+"Language-Team: Spanish (Spain) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
+"Language: es_ES\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 msgid "Enable"
 msgstr "Habilitar"
 
 msgid "Extra options"
-msgstr ""
+msgstr "Opciones extras"
 
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 msgid "Select a group ..."
-msgstr ""
+msgstr "Seleccionar grupo ..."
 
 msgid "Shared folder"
 msgstr "Carpeta compartida"
 
 msgid "This option specifies the group that has access."
-msgstr ""
+msgstr "Está opción especifica el grupo que tendrá acceso."
 
 msgid "Updated WebDAV settings."
-msgstr ""
+msgstr "Actualizar opciones de WebDAV."
 
 msgid "Use auth"
-msgstr ""
+msgstr "Usar auth"
 
 msgid "WebDAV"
 msgstr "WebDAV"
 
 msgid "extra nginx config lines"
-msgstr ""
+msgstr "Líneas de configuración adicional de nginx."

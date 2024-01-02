@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the openmediavault-webdav package.
 # 
 # Translators:
-# kochin <kochinc@outlook.com>, 2014,2016
+# kochin <kochinc@outlook.com>, 2014,2016,2022
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-04 07:35-0500\n"
 "PO-Revision-Date: 2013-10-28 15:04+0000\n"
-"Last-Translator: kochin <kochinc@outlook.com>, 2014,2016\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/zh_TW/)\n"
+"Last-Translator: kochin <kochinc@outlook.com>, 2014,2016,2022\n"
+"Language-Team: Chinese (Taiwan) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,28 +22,28 @@ msgid "Enable"
 msgstr "啟用"
 
 msgid "Extra options"
-msgstr ""
+msgstr "額外選項"
 
 msgid "Group"
-msgstr ""
+msgstr "群組"
 
 msgid "Select a group ..."
-msgstr ""
+msgstr "選擇一個群組 ..."
 
 msgid "Shared folder"
 msgstr "共享檔案夾"
 
 msgid "This option specifies the group that has access."
-msgstr ""
+msgstr "此選項指定有存取權限的群組。"
 
 msgid "Updated WebDAV settings."
-msgstr ""
+msgstr "已更新 WebDAV 設定。"
 
 msgid "Use auth"
-msgstr ""
+msgstr "使用驗證"
 
 msgid "WebDAV"
 msgstr "WebDAV"
 
 msgid "extra nginx config lines"
-msgstr ""
+msgstr "額外 nginx 設置行"
