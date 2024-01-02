@@ -1,3 +1,9 @@
+openmediavault-webdav (7.0.1) stable; urgency=low
+
+  * Don't create webdav directory, use selected shared folder as root
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 02 Jan 2024 17:07:31 -0600
+
 openmediavault-webdav (7.0) stable; urgency=low
 
   * Update for OMV 7.x
