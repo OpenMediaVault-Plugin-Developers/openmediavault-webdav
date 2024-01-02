@@ -1,6 +1,6 @@
 # @license   http://www.gnu.org/licenses/gpl.html GPL Version 3
 # @author    OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-# @copyright Copyright (c) 2019-2022 OpenMediaVault Plugin Developers
+# @copyright Copyright (c) 2019-2024 OpenMediaVault Plugin Developers
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,19 +24,12 @@
 
 {% set sfpath = salt['omv_conf.get_sharedfolder_path'](config.sharedfolderref) %}
 
-configure_sftp_root_dir:
-  file.directory:
-    - name: "{{ sfpath }}/webdav"
-    - user: www-data
-    - group: "{{ config.grpname }}"
-    - mode: 770
-
 configure_webdav:
   file.managed:
     - name: "{{ confFile }}"
     - contents: |
         location /webdav {
-            root {{ sfpath }};
+            alias {{ sfpath }};
             dav_methods PUT DELETE MKCOL COPY MOVE;
             dav_ext_methods PROPFIND OPTIONS;
             dav_access  user:rw group:rw;
