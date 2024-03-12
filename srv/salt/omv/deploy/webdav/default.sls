@@ -40,6 +40,7 @@ configure_webdav:
             auth_pam_service_name "openmediavault-webdav";
             {% endif -%}
             autoindex on;
+            error_page 404 /_404;
         }
     - user: root
     - group: root
