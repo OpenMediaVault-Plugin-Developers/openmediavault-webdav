@@ -1,3 +1,9 @@
+openmediavault-webdav (7.0.2) stable; urgency=low
+
+  * Override 404 error page - issue #21
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 12 Mar 2024 15:45:07 -0500
+
 openmediavault-webdav (7.0.1) stable; urgency=low
 
   * Don't create webdav directory, use selected shared folder as root
