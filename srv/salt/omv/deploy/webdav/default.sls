@@ -15,8 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+# The configuration was based on:
+# https://nworm.icu/post/nginx-webdav-dolphin-deken/
+# https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/
+# https://wiki.archlinux.org/title/WebDAV
+
+# if the request method is MKCOL or is to a directory, add / at the end of the request if it was missing
+# if the request method is copy or move a directory, add / at the end of the request if it was missing
+
 {% set config = salt['omv_conf.get']('conf.service.webdav') %}
 {% set confFile = '/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf' %}
+{% set lockFile = '/etc/nginx/conf.d/openmediavault-lockzone.conf' %}
 {% set pamFile = '/etc/pam.d/openmediavault-webdav' %}
 {% set allowFile = '/etc/openmediavault-webdev.group.allow' %}
 
@@ -31,7 +40,8 @@ configure_webdav:
         location /webdav {
             alias {{ sfpath }};
             dav_methods PUT DELETE MKCOL COPY MOVE;
-            dav_ext_methods PROPFIND OPTIONS;
+            dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+            dav_ext_lock zone=foo;
             dav_access  user:rw group:rw;
             create_full_put_path on;
             client_body_temp_path /srv/client_temp;
@@ -41,7 +51,37 @@ configure_webdav:
             {% endif -%}
             autoindex on;
             error_page 404 /_404;
+            if ($request_method = MKCOL) {
+                rewrite ^(.*[^/])$ $1/ break;
+            }
+            if (-d $request_filename) {
+                rewrite ^(.*[^/])$ $1/ break;
+            }
+            set $is_copy_or_move 0;
+            set $is_dir 0;
+            if (-d $request_filename) {
+                set $is_dir 1;
+            }
+            if ($request_method = COPY) {
+                set $is_copy_or_move 1;
+            }
+            if ($request_method = MOVE) {
+                set $is_copy_or_move 1;
+            }
+            set $is_rewrite "${is_dir}${is_copy_or_move}";
+            if ($is_rewrite = 11) {
+                rewrite ^(.*[^/])$ $1/ break;
+            }
         }
+    - user: root
+    - group: root
+    - mode: 644
+
+configure_lockzone_conf:
+  file.managed:
+    - name: "{{ lockFile }}"
+    - contents: |
+        dav_ext_lock_zone zone=foo:10m;
     - user: root
     - group: root
     - mode: 644
@@ -83,6 +123,7 @@ remove_webdav_conf_files:
   file.absent:
     - names:
       - "{{ confFile }}"
+      - "{{ lockFile }}"
       - "{{ pamFile }}"
       - "{{ allowFile }}"
 
