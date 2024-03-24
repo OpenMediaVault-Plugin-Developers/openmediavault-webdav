@@ -11,6 +11,7 @@ Architecture: all
 Depends: openmediavault (>= 7),
          libnginx-mod-http-auth-pam,
          libnginx-mod-http-dav-ext,
+         libnginx-mod-http-headers-more-filter,
          ${misc:Depends}
 Description: OpenMediaVault WebDAV plugin.
  Web interface to enable WebDAV and select a share for files.
