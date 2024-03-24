@@ -19,9 +19,10 @@
 # https://nworm.icu/post/nginx-webdav-dolphin-deken/
 # https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/
 # https://wiki.archlinux.org/title/WebDAV
+# https://www.robpeck.com/2020/06/making-webdav-actually-work-on-nginx/
 
-# if the request method is MKCOL or is to a directory, add / at the end of the request if it was missing
-# if the request method is copy or move a directory, add / at the end of the request if it was missing
+# if the request method is MKCOL or is to a directory, add / at the end of the URL if it was missing
+# if the request method is COPY or MOVE a directory, also add / at the end of the Destination header if it was missing
 
 {% set config = salt['omv_conf.get']('conf.service.webdav') %}
 {% set confFile = '/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf' %}
@@ -52,25 +53,28 @@ configure_webdav:
             autoindex on;
             error_page 404 /_404;
             if ($request_method = MKCOL) {
-                rewrite ^(.*[^/])$ $1/ break;
+                rewrite ^(.*[^/])$ $1/;
             }
-            if (-d $request_filename) {
-                rewrite ^(.*[^/])$ $1/ break;
-            }
-            set $is_copy_or_move 0;
-            set $is_dir 0;
-            if (-d $request_filename) {
-                set $is_dir 1;
+            set $destination $http_destination;
+            set $parse "";
+            if ($request_method = MOVE) {
+                set $parse "${parse}M";
             }
             if ($request_method = COPY) {
-                set $is_copy_or_move 1;
+                set $parse "${parse}M";
             }
-            if ($request_method = MOVE) {
-                set $is_copy_or_move 1;
+            if (-d $request_filename) {
+                rewrite ^(.*[^/])$ $1/;
+                set $parse "${parse}D";
             }
-            set $is_rewrite "${is_dir}${is_copy_or_move}";
-            if ($is_rewrite = 11) {
-                rewrite ^(.*[^/])$ $1/ break;
+            if ($destination ~ ^(https?://.+)$) {
+                set $ob $1;
+                set $parse "${parse}R${ob}";
+            }
+            if ($parse ~ ^MDR(.*[^/])$) {
+                set $mvpath $1;
+                set $destination "${mvpath}/";
+                more_set_input_headers "Destination: $destination";
             }
         }
     - user: root
