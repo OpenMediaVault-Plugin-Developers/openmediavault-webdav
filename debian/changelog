@@ -1,3 +1,9 @@
+openmediavault-webdav (7.0.3) stable; urgency=low
+
+  * Improve client support
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 24 Mar 2024 11:33:29 -0500
+
 openmediavault-webdav (7.0.2) stable; urgency=low
 
   * Override 404 error page - issue #21
