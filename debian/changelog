@@ -1,3 +1,9 @@
+openmediavault-webdav (7.0.4) stable; urgency=low
+
+  * Actually add extra options to the nginx config file
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 23 Apr 2024 06:17:59 -0500
+
 openmediavault-webdav (7.0.3) stable; urgency=low
 
   * Improve client support
