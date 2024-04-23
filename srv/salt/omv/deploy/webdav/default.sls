@@ -76,6 +76,7 @@ configure_webdav:
                 set $destination "${mvpath}/";
                 more_set_input_headers "Destination: $destination";
             }
+            {{ config.extraoptions | indent(12) }}
         }
     - user: root
     - group: root
