@@ -50,6 +50,6 @@ data:
         label: _("Extra options")
         value: ""
         rows: 3
-        hint: _("extra nginx config lines")
+        hint: _("extra nginx config lines<br/>Must be valid for the nginx location context")
     buttons:
       - template: submit
