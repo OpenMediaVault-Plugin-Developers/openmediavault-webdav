@@ -19,11 +19,23 @@
  */
 
 class OMVModuleWebdav extends \OMV\Engine\Module\ServiceAbstract
-    implements \OMV\Engine\Notify\IListener
+    implements \OMV\Engine\Notify\IListener, \OMV\Engine\Module\IServiceStatus
 {
     public function getName()
     {
         return "webdav";
+    }
+
+    public function getStatus()
+    {
+        $db = \OMV\Config\Database::getInstance();
+        $object = $db->get("conf.service.webdav");
+        return array(
+            "name" => $this->getName(),
+            "title" => gettext("WebDAV"),
+            "enabled" => $object->get("enable"),
+            "running" => $object->get("enable")
+        );
     }
 
     public function bindListeners(\OMV\Engine\Notify\Dispatcher $dispatcher)
