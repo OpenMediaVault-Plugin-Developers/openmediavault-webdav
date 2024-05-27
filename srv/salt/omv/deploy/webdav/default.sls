@@ -30,7 +30,7 @@
 {% set pamFile = '/etc/pam.d/openmediavault-webdav' %}
 {% set allowFile = '/etc/openmediavault-webdev.group.allow' %}
 
-{% if config.enable | to_bool %}
+{% if config.enable | to_bool and config.sharedfolderref != '' %}
 
 {% set sfpath = salt['omv_conf.get_sharedfolder_path'](config.sharedfolderref) %}
 
@@ -76,6 +76,7 @@ configure_webdav:
                 set $destination "${mvpath}/";
                 more_set_input_headers "Destination: $destination";
             }
+            {{ config.extraoptions | indent(12) }}
         }
     - user: root
     - group: root

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 07:35-0500\n"
+"POT-Creation-Date: 2024-05-26 13:37-0500\n"
 "PO-Revision-Date: 2013-10-28 15:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Adyghe (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/ady/)\n"
@@ -32,6 +32,9 @@ msgstr ""
 msgid "Shared folder"
 msgstr ""
 
+msgid "Shared folder must not be 'None' to enable webdav"
+msgstr ""
+
 msgid "This option specifies the group that has access."
 msgstr ""
 
@@ -45,4 +48,8 @@ msgid "WebDAV"
 msgstr ""
 
 msgid "extra nginx config lines"
+msgstr ""
+
+msgid ""
+"extra nginx config lines<br/>Must be valid for the nginx location context"
 msgstr ""

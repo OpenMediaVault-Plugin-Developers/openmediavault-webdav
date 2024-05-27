@@ -15,10 +15,19 @@ data:
         name: enable
         label: _("Enable")
         value: false
+        modifiers:
+          - type: value
+            typeConfig: false
+            constraint:
+              operator: eq
+              arg0:
+                prop: sharedfolderref
+              arg1: ""
       - type: sharedFolderSelect
         name: sharedfolderref
         label: _("Shared folder")
         hasEmptyOption: true
+        hint: _("Shared folder must not be 'None' to enable webdav")
       - type: checkbox
         name: auth
         label: _("Use auth")
@@ -50,6 +59,6 @@ data:
         label: _("Extra options")
         value: ""
         rows: 3
-        hint: _("extra nginx config lines")
+        hint: _("extra nginx config lines<br/>Must be valid for the nginx location context")
     buttons:
       - template: submit

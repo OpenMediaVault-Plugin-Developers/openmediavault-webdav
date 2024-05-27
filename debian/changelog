@@ -1,3 +1,23 @@
+openmediavault-webdav (7.0.5) stable; urgency=low
+
+  * Prevent setting sharedfolder to 'None' when webdav is disabled
+  * Prevent salt failures if webdav is enabled and sharedfolder is set to 'None'
+  * Add service status on service dashboard widgets
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 26 May 2024 13:40:53 -0500
+
+openmediavault-webdav (7.0.4) stable; urgency=low
+
+  * Actually add extra options to the nginx config file
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 23 Apr 2024 06:17:59 -0500
+
+openmediavault-webdav (7.0.3) stable; urgency=low
+
+  * Improve client support
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 24 Mar 2024 11:33:29 -0500
+
 openmediavault-webdav (7.0.2) stable; urgency=low
 
   * Override 404 error page - issue #21

@@ -46,6 +46,12 @@ class OMVRpcServiceWebdav extends \OMV\Rpc\ServiceAbstract
         $this->validateMethodContext($context, ["role" => OMV_ROLE_ADMINISTRATOR]);
         // Validate the parameters of the RPC service method.
         $this->validateMethodParams($params, "rpc.webdav.set");
+        // Verify that sharedfolder is not set to None when service is enabled
+        if ($params['enable'] == true && $params['sharedfolderref'] == '') {
+            throw new \OMV\Exception(
+              gettext("Shared folder must not be 'None' to enable webdav")
+            );
+        }
         // Get the existing configuration object.
         $db = \OMV\Config\Database::getInstance();
         $object = $db->get("conf.service.webdav");
