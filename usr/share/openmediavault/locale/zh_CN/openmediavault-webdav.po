@@ -34,7 +34,7 @@ msgid "Shared folder"
 msgstr "共享文件夹"
 
 msgid "Shared folder must not be 'None' to enable webdav"
-msgstr ""
+msgstr "要启用 webdav ，共享文件夹不能为空"
 
 msgid "This option specifies the group that has access."
 msgstr "该选项用于设置有访问权限的组。"

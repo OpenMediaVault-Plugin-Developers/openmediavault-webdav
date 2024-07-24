@@ -35,7 +35,7 @@ msgid "Shared folder"
 msgstr "Megosztott mappa"
 
 msgid "Shared folder must not be 'None' to enable webdav"
-msgstr ""
+msgstr "A megosztott mappa nem lehet „nincs” a webdav engedélyezéséhez"
 
 msgid "This option specifies the group that has access."
 msgstr "Ez a beállítás meghatározza a hozzáféréssel rendelkező csoportot."
