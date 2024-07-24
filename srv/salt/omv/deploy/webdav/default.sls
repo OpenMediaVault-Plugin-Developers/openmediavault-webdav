@@ -139,3 +139,16 @@ reload_nginx_service:
     - name: nginx
     - enable: True
     - reload: True
+    - watch:
+{% if config.enable | to_bool and config.sharedfolderref != '' %}
+      - file: configure_webdav
+      - file: configure_lockzone_conf
+{% if config.auth | to_bool %}
+      - file: configure_webdav_pam
+      - file: configure_pam_allow
+{% else %}
+      - file: remove_webdav_auth_files
+{% endif %}
+{% else %}
+      - file: remove_webdav_conf_files
+{% endif %}
