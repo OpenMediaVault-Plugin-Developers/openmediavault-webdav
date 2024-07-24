@@ -1,3 +1,9 @@
+openmediavault-webdav (7.0.6) stable; urgency=low
+
+  * Fix nginx reload when making changes
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 24 Jul 2024 07:54:47 -0500
+
 openmediavault-webdav (7.0.5) stable; urgency=low
 
   * Prevent setting sharedfolder to 'None' when webdav is disabled
