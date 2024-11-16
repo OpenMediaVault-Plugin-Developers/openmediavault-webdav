@@ -1,16 +1,25 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-OMV_WEBDAV_SITE_CONF="/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
-OMV_WEBDAV_PAM_CONF="/etc/pam.d/openmediavault-webdav"
-OMV_WEBDAV_ALLOW_CONF="/etc/openmediavault-webdev.group.allow"
+OMV_WEBDAV_CONFIGS=(
+    "/etc/nginx/conf.d/openmediavault-lockzone.conf"
+    "/etc/nginx/openmediavault-webgui.d/openmediavault-webdav.conf"
+    "/etc/openmediavault-webdev.group.allow"
+    "/etc/pam.d/openmediavault-webdav"
+)
 
 remove_action() {
     dpkg-trigger update-workbench
+
+    # remove webdav nginx config files and reload nginx
+    for conf in "${OMV_WEBDAV_CONFIGS[@]}"; do
+        [ -e "${conf}" ] && rm -fv "${conf}"
+    done
+    deb-systemd-invoke reload nginx.service >/dev/null || true
 }
 
 case "$1" in
@@ -21,17 +30,6 @@ case "$1" in
 
     remove)
         remove_action
-        if [ -e "${OMV_WEBDAV_SITE_CONF}" ]; then
-            rm "${OMV_WEBDAV_SITE_CONF}"
-        fi
-        if [ -e "${OMV_WEBDAV_PAM_CONF}" ]; then
-            rm "${OMV_WEBDAV_PAM_CONF}"
-        fi
-        if [ -e "${OMV_WEBDAV_ALLOW_CONF}" ]; then
-            rm "${OMV_WEBDAV_ALLOW_CONF}"
-        fi
-
-        deb-systemd-invoke reload nginx.service >/dev/null || true
     ;;
 
     upgrade|failed-upgrade|abort-install|abort-upgrade|disappear|remove)
