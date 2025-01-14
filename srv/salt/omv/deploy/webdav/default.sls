@@ -38,7 +38,7 @@ configure_webdav:
   file.managed:
     - name: "{{ confFile }}"
     - contents: |
-        location /webdav {
+        location ^~ /webdav {
             alias {{ sfpath }};
             dav_methods PUT DELETE MKCOL COPY MOVE;
             dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
