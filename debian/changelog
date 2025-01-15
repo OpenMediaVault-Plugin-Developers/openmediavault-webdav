@@ -1,8 +1,8 @@
-openmediavault-webdav (7.0.8) UNRELEASED; urgency=medium
+openmediavault-webdav (7.0.8) stable; urgency=low
 
   * increase /webdav prefix priority
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 14 Jan 2025 07:29:25 -0600
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 15 Jan 2025 10:02:34 -0600
 
 openmediavault-webdav (7.0.7) stable; urgency=low
 
