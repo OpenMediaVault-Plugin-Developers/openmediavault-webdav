@@ -38,8 +38,12 @@ configure_webdav:
   file.managed:
     - name: "{{ confFile }}"
     - contents: |
-        location ^~ /webdav {
-            alias {{ sfpath }};
+        location = /webdav {
+            return 301 /webdav/;
+        }
+
+        location ^~ /webdav/ {
+            alias {{ sfpath }}/;
             dav_methods PUT DELETE MKCOL COPY MOVE;
             dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
             dav_ext_lock zone=foo;
@@ -52,6 +56,7 @@ configure_webdav:
             {% endif -%}
             autoindex on;
             error_page 404 /_404;
+
             if ($request_method = MKCOL) {
                 rewrite ^(.*[^/])$ $1/;
             }
