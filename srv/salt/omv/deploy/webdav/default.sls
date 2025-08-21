@@ -32,6 +32,17 @@
 
 {% if config.enable | to_bool and config.sharedfolderref != '' %}
 
+{%- set worker_user = salt['pillar.get']('nginx:worker_user', 'www-data') -%}
+{%- set worker_group = salt['pillar.get']('nginx:worker_group', worker_user) -%}
+
+create_temp_dir:
+  file.directory:
+    - name: "/srv/client_temp"
+    - user: {{ worker_user }}
+    - group: {{ worker_group }}
+    - mode: 0750
+    - makedirs: True
+
 {% set sfpath = salt['omv_conf.get_sharedfolder_path'](config.sharedfolderref) %}
 
 configure_webdav:
