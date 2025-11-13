@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-26 13:37-0500\n"
+"POT-Creation-Date: 2025-11-13 23:45+0000\n"
 "PO-Revision-Date: 2013-10-28 15:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Basque (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/eu/)\n"
@@ -45,9 +45,6 @@ msgid "Use auth"
 msgstr ""
 
 msgid "WebDAV"
-msgstr ""
-
-msgid "extra nginx config lines"
 msgstr ""
 
 msgid ""
