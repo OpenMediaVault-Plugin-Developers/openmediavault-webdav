@@ -8,7 +8,7 @@ XB-Plugin-Section: filesystems
 
 Package: openmediavault-webdav
 Architecture: all
-Depends: openmediavault (>= 7),
+Depends: openmediavault (>= 8),
          libnginx-mod-http-auth-pam,
          libnginx-mod-http-dav-ext,
          libnginx-mod-http-headers-more-filter,

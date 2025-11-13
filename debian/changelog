@@ -1,3 +1,9 @@
+openmediavault-webdav (8.0) stable; urgency=low
+
+  * Update for omv 8
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Thu, 13 Nov 2025 23:40:59 +0000
+
 openmediavault-webdav (7.0.8) stable; urgency=low
 
   * increase /webdav prefix priority
@@ -81,7 +87,7 @@ openmediavault-webdav (3.0.3) stable; urgency=medium
 openmediavault-webdav (3.0.2) stable; urgency=medium
 
   * OMV 3.0.21 compatiblity.
-  * Warn about missing permissions. 
+  * Warn about missing permissions.
 
  -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 04 Jun 2016 19:19:49 +0200
 
@@ -95,7 +101,7 @@ openmediavault-webdav (3.0.1) stable; urgency=medium
 
 openmediavault-webdav (3.0) stable; urgency=low
 
-  * OMV 3.0 release. 
+  * OMV 3.0 release.
 
  -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 30 Dec 2015 19:14:24 +0100
 
