@@ -1,3 +1,10 @@
+openmediavault-webdav (8.0.1) UNRELEASED; urgency=medium
+
+  * Add user isolation option
+  * Allow url path to be customized
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Tue, 09 Dec 2025 17:41:17 +0000
+
 openmediavault-webdav (8.0) stable; urgency=low
 
   * Update for omv 8
