@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-13 23:45+0000\n"
+"POT-Creation-Date: 2025-12-09 17:52+0000\n"
 "PO-Revision-Date: 2013-10-28 15:04+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2015-2017,2023-2024\n"
 "Language-Team: English (United Kingdom) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/en_GB/)\n"
@@ -24,8 +24,17 @@ msgstr "Enable"
 msgid "Extra options"
 msgstr "Extra options"
 
+msgid "Folder name or path after the domain (e.g., /webdav)."
+msgstr ""
+
 msgid "Group"
 msgstr "Group"
+
+msgid "Isolate each user into their own WebDAV directory."
+msgstr ""
+
+msgid "Path"
+msgstr ""
 
 msgid "Select a group ..."
 msgstr "Select a group ..."
@@ -44,6 +53,9 @@ msgstr "Updated WebDAV settings."
 
 msgid "Use auth"
 msgstr "Use auth"
+
+msgid "User isolation"
+msgstr ""
 
 msgid "WebDAV"
 msgstr "WebDAV"
