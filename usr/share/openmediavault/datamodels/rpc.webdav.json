@@ -23,6 +23,14 @@
                     ],
                     "required": true
                 },
+                "path": {
+                    "type": "string",
+                    "required": true
+                },
+                "userisolation": {
+                    "type": "boolean",
+                    "required": true
+                },
                 "auth": {
                     "type": "boolean",
                     "required": true

@@ -30,6 +30,8 @@ if ! omv_config_exists "${SERVICE_XPATH}"; then
     omv_config_add_node "/config/services" "${SERVICE_XPATH_NAME}"
     omv_config_add_key "${SERVICE_XPATH}" "enable" "0"
     omv_config_add_key "${SERVICE_XPATH}" "sharedfolderref" ""
+    omv_config_add_key "${SERVICE_XPATH}" "path" "webdav"
+    omv_config_add_key "${SERVICE_XPATH}" "userisolation" "0"
     omv_config_add_key "${SERVICE_XPATH}" "auth" "1"
     omv_config_add_key "${SERVICE_XPATH}" "grpname" "webdav-users"
     omv_config_add_key "${SERVICE_XPATH}" "extraoptions" ""

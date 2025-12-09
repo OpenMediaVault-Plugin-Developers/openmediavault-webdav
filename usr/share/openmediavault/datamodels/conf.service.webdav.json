@@ -25,6 +25,14 @@
             ],
             "default": ""
         },
+        "path": {
+            "type": "string",
+            "default": "webdav"
+        },
+        "userisolation": {
+            "type": "boolean",
+            "default": false
+        },
         "auth": {
             "type": "boolean",
             "default": true

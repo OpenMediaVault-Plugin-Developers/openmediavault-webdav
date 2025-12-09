@@ -28,6 +28,16 @@ data:
         label: _("Shared folder")
         hasEmptyOption: true
         hint: _("Shared folder must not be 'None' to enable webdav")
+      - type: textInput
+        name: path
+        label: _("Path")
+        value: "webdav"
+        hint: _("Folder name or path after the domain (e.g., /webdav).")
+      - type: checkbox
+        name: userisolation
+        label: _("User isolation")
+        value: false
+        hint: _("Isolate each user into their own WebDAV directory.")
       - type: checkbox
         name: auth
         label: _("Use auth")

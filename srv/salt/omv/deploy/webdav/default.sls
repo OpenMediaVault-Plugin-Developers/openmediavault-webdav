@@ -44,17 +44,17 @@ create_temp_dir:
     - makedirs: True
 
 {% set sfpath = salt['omv_conf.get_sharedfolder_path'](config.sharedfolderref) %}
+{% set urlpath = config.path.rstrip('/') %}
 
 configure_webdav:
   file.managed:
     - name: "{{ confFile }}"
     - contents: |
-        location = /webdav {
-            return 301 /webdav/;
+        location = /{{ urlpath }} {
+            return 301 /{{ urlpath }}/;
         }
 
-        location ^~ /webdav/ {
-            alias {{ sfpath }}/;
+        location ^~ /{{ urlpath }}/ {
             dav_methods PUT DELETE MKCOL COPY MOVE;
             dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
             dav_ext_lock zone=foo;
@@ -66,8 +66,13 @@ configure_webdav:
             auth_pam_service_name "openmediavault-webdav";
             {% endif -%}
             autoindex on;
+            {%- if config.userisolation | to_bool %}
+            root {{ sfpath }};
+            rewrite ^/{{ urlpath }}/(.*)$ /$remote_user/$1 break;
+            {%- else %}
+            alias {{ sfpath.rstrip('/') }}/;
+            {%- endif %}
             error_page 404 /_404;
-
             if ($request_method = MKCOL) {
                 rewrite ^(.*[^/])$ $1/;
             }
