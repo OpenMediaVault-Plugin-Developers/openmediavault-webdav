@@ -40,7 +40,7 @@ create_temp_dir:
     - name: "/srv/client_temp"
     - user: {{ worker_user }}
     - group: {{ worker_group }}
-    - mode: 0750
+    - mode: '0750'
     - makedirs: True
 
 {% set sfpath = salt['omv_conf.get_sharedfolder_path'](config.sharedfolderref) %}
@@ -101,7 +101,7 @@ configure_webdav:
         }
     - user: root
     - group: root
-    - mode: 644
+    - mode: '0644'
 
 configure_lockzone_conf:
   file.managed:
@@ -110,7 +110,7 @@ configure_lockzone_conf:
         dav_ext_lock_zone zone=foo:10m;
     - user: root
     - group: root
-    - mode: 644
+    - mode: '0644'
 
 {% if config.auth | to_bool %}
 
@@ -122,7 +122,7 @@ configure_webdav_pam:
         @include common-auth
     - user: root
     - group: root
-    - mode: 644
+    - mode: '0644'
 
 configure_pam_allow:
   file.managed:
@@ -131,7 +131,7 @@ configure_pam_allow:
         {{ config.grpname }}
     - user: root
     - group: root
-    - mode: 644
+    - mode: '0644'
 
 {% else %}
 
