@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the openmediavault-webdav package.
 # 
 # Translators:
-# songming <by@songming.me>, 2013,2016,2022,2024
+# songming <by@songming.me>, 2013,2016,2022,2024-2025
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-09 17:52+0000\n"
+"POT-Creation-Date: 2026-05-31 01:30+0000\n"
 "PO-Revision-Date: 2013-10-28 15:04+0000\n"
-"Last-Translator: songming <by@songming.me>, 2013,2016,2022,2024\n"
+"Last-Translator: songming <by@songming.me>, 2013,2016,2022,2024-2025\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,16 +25,16 @@ msgid "Extra options"
 msgstr "扩展选项"
 
 msgid "Folder name or path after the domain (e.g., /webdav)."
-msgstr ""
+msgstr "域名后的文件夹名称或路径（例如：/webdav）"
 
 msgid "Group"
 msgstr "组"
 
 msgid "Isolate each user into their own WebDAV directory."
-msgstr ""
+msgstr "隔离每个用户到他们自己的 WebDAV 目录中。"
 
 msgid "Path"
-msgstr ""
+msgstr "路径"
 
 msgid "Select a group ..."
 msgstr "选择组 ..."
@@ -55,7 +55,7 @@ msgid "Use auth"
 msgstr "使用身份验证"
 
 msgid "User isolation"
-msgstr ""
+msgstr "用户隔离"
 
 msgid "WebDAV"
 msgstr "WebDAV"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-webdav\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-09 17:52+0000\n"
+"POT-Creation-Date: 2026-05-31 01:30+0000\n"
 "PO-Revision-Date: 2013-10-28 15:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Lao (Laos) (http://app.transifex.com/openmediavault-plugin-developers/openmediavault-webdav/language/lo_LA/)\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Enable"
-msgstr ""
+msgstr "ເປີດໃຊ້ງານ"
 
 msgid "Extra options"
-msgstr ""
+msgstr "ຕົວເລືອກເພີ່ມເຕີມ"
 
 msgid "Folder name or path after the domain (e.g., /webdav)."
-msgstr ""
+msgstr "ຊື່ໂຟນເດີ ຫຼື ເສັ້ນທາງຫຼັງຈາກໂດເມນ (ຕົວຢ່າງ: /webdav)."
 
 msgid "Group"
-msgstr ""
+msgstr "ກຸ່ມ"
 
 msgid "Isolate each user into their own WebDAV directory."
-msgstr ""
+msgstr "ແຍກຜູ້ໃຊ້ແຕ່ລະຄົນໄວ້ໃນໄດເຣັກທໍຣີ WebDAV ຂອງໃຜລາວ."
 
 msgid "Path"
-msgstr ""
+msgstr "ເສັ້ນທາງ"
 
 msgid "Select a group ..."
-msgstr ""
+msgstr "ເລືອກກຸ່ມ ..."
 
 msgid "Shared folder"
-msgstr ""
+msgstr "ໂຟນເດີທີ່ແບ່ງປັນ"
 
 msgid "Shared folder must not be 'None' to enable webdav"
-msgstr ""
+msgstr "ໂຟນເດີທີ່ແບ່ງປັນຕ້ອງບໍ່ແມ່ນ 'None' ເພື່ອເປີດໃຊ້ງານ webdav"
 
 msgid "This option specifies the group that has access."
-msgstr ""
+msgstr "ຕົວເລືອກນີ້ລະບຸກຸ່ມທີ່ມີສິດເຂົ້າເຖິງ."
 
 msgid "Updated WebDAV settings."
-msgstr ""
+msgstr "ອັບເດດການຕັ້ງຄ່າ WebDAV ແລ້ວ."
 
 msgid "Use auth"
-msgstr ""
+msgstr "ໃຊ້ການຢືນຢັນຕົວຕົນ"
 
 msgid "User isolation"
-msgstr ""
+msgstr "ການແຍກຜູ້ໃຊ້"
 
 msgid "WebDAV"
-msgstr ""
+msgstr "WebDAV"
 
 msgid ""
 "extra nginx config lines<br/>Must be valid for the nginx location context"
-msgstr ""
+msgstr "ບັນທັດການຕັ້ງຄ່າ nginx ເພີ່ມເຕີມ<br/>ຕ້ອງຖືກຕ້ອງຕາມບໍລິບົດຂອງ nginx location"
